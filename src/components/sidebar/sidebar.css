@@ -1,23 +1,21 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
 
-:root {
-  --sidebar-bg-color: #354052;
-  --sidebar-dark-color: #2b3444;
-}
-
 .sidebar-container {
   font-family: "Montserrat", sans-serif;
   background: var(--sidebar-bg-color);
-  color: #c9c9c9;
-  position: absolute;
-  top: 0;
+  color: var(--sidebar-content-color);
+  margin-top: var(--topbar-height);
+  position: fixed;
   left: 0;
   height: 100%;
+  width: var(--sidebar-width);
+  transition: transform 0.3s ease-in-out;
 }
 
 .sidebar-item {
   padding: 20px 25px 20px 12px;
   transition: all 0.3s ease-in-out;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   cursor: pointer;
 }
 
@@ -27,6 +25,7 @@
 
 .sidebar-item.active {
   background: var(--sidebar-dark-color);
+  border-left: 3px solid var(--topbar-bg-color);
 }
 
 .sidebar-item i {
@@ -38,28 +37,32 @@
   font-size: 0.8em;
 }
 
+.sidebar-toggle {
+  font-size: 1.4em;
+  display: inline-block;
+  background: var(--topbar-bg-color);
+  color: #ffffff;
+  padding: 10px 10px;
+  height: 60%;
+  flex: 1;
+  transition: all 0.1s ease-in-out;
+}
+
+.sidebar-container.hidden {
+  transform: translateX(-100%);
+}
+
 @media (max-width: 600px) {
   .sidebar-container {
-    height: auto;
-    width: 100%;
+    transform: translateX(-100%);
   }
-
-  .sidebar {
-    width: 100%;
-    display: flex;
+  .sidebar-container.hidden {
+    transform: translateX(0);
   }
+}
 
-  .sidebar-item {
-    text-align: center;
-    display: inline-block;
-    flex: 1;
-  }
-
-  .sidebar-item i {
-    width: 3px;
-  }
-
-  .sidebar-item span {
-    display: none;
+@media (hover: hover) {
+  .sidebar-toggle:hover {
+    background: var(--topbar-dark-color);
   }
 }
