@@ -6,12 +6,23 @@
     "@material-ui/core": "^4.1.1",
     "@material-ui/icons": "^4.2.1",
     "bootstrap": "^4.3.1",
+    "date-fns": "^1.30.1",
     "font-awesome": "^4.7.0",
+    "moment": "^2.24.0",
     "react": "^16.8.6",
+<<<<<<< HEAD
+=======
+    "react-big-calendar": "^0.22.0",
+>>>>>>> add basic code of calendar
     "react-bootstrap": "^1.0.0-beta.9",
     "react-dom": "^16.8.6",
+<<<<<<< HEAD
     "react-scripts": "3.0.1",
     "react-swipeable-views": "^0.13.3"
+=======
+    "react-event-calendar": "^0.3.0",
+    "react-scripts": "3.0.1"
+>>>>>>> Update Code
   },
   "scripts": {
     "start": "react-scripts start",
@@ -33,5 +44,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "node-sass": "^4.12.0",
+    "sass-loader": "^7.1.0",
+    "xxxxx": "^1.0.3"
   }
 }
