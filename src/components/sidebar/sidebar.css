@@ -1,7 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
-
 .sidebar-container {
-  font-family: "Montserrat", sans-serif;
   background: var(--sidebar-bg-color);
   color: var(--sidebar-content-color);
   margin-top: var(--topbar-height);
