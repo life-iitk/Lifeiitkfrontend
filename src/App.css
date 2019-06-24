@@ -1,5 +1,6 @@
 @import "./components/sidebar/sidebar.css";
 @import "./components/topbar/topbar.css";
+@import url("https://fonts.googleapis.com/css?family=PT+Sans&display=swap");
 
 :root {
   /* Sidebar variables */
@@ -9,13 +10,18 @@
   --sidebar-content-color: #c9c9c9;
   /* Topbar variables */
   --topbar-height: 50px;
-  --topbar-bg-color: #0059ff;
-  --topbar-dark-color: #004cd8;
+  --topbar-bg-color: #2555cf;
+  --topbar-dark-color: #0b3cb8;
+}
+
+* {
+  font-family: "PT Sans", sans-serif;
 }
 
 /* CSS FOR MAIN BODY WRAPPER */
 
 .main-wrapper {
+  background: #ececec;
   position: fixed;
   overflow-y: auto;
   bottom: 0;

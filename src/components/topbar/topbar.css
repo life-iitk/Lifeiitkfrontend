@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
-
 .topbar-container {
   position: fixed;
   width: 100%;
@@ -10,7 +8,6 @@
 
 .topbar-container .page-title {
   font-size: 1.4em;
-  font-family: "Montserrat", sans-serif;
   font-weight: 900;
   padding-left: 10px;
   display: inline-block;
