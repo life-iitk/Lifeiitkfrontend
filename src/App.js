@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import "bootstrap/dist/css/bootstrap.css";
 // import logo from "./logo.svg";
 import "./App.css";
+
 import SideBar from "./components/sidebar/sidebar";
 import TopBar from "./components/topbar/topbar";
 import Main from "./components/main";
