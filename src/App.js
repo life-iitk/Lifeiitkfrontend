@@ -4,6 +4,7 @@ import "./App.css";
 import SideBar from "./components/sidebar/sidebar";
 import TopBar from "./components/topbar/topbar";
 import Main from "./components/main";
+import LoginBox from "./components/login/loginBox";
 
 class App extends Component {
   // 'icon' property in pages is the FontAwesome icon name.
@@ -19,12 +20,17 @@ class App extends Component {
         { name: "Profile", icon: "user" }
       ],
       activePage: 0,
-      sidebarActive: true
+      sidebarActive: true,
+      loginBoxOpen: false
     };
   }
 
   sidebarToggleHandler = () => {
     this.setState({ sidebarActive: !this.state.sidebarActive });
+  };
+
+  loginBoxToggleHandler = () => {
+    this.setState({ loginBoxOpen: !this.state.loginBoxOpen });
   };
 
   switchPage = page => {
@@ -44,11 +50,16 @@ class App extends Component {
           activePage={this.state.activePage}
           pageHandler={this.switchPage}
           active={this.state.sidebarActive}
+          openLogin={this.loginBoxToggleHandler}
         />
         {/* Container for the main body */}
         <Main
           page={this.state.pages[this.state.activePage]}
           sidebarActive={this.state.sidebarActive}
+        />
+        <LoginBox
+          open={this.state.loginBoxOpen}
+          onClose={this.loginBoxToggleHandler}
         />
       </React.Fragment>
     );
