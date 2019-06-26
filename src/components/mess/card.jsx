@@ -284,7 +284,7 @@ const Card = props => {
   return (
     <React.Fragment>
       <div className="row">
-        <h1 class={isMob ? "mob" : "desktop"}>
+        <h1 className={isMob ? "mob" : "desktop"}>
           {elems[props.selectedHall - 1][props.day].title}
         </h1>
       </div>

@@ -1,6 +1,4 @@
-@import "./components/sidebar/sidebar.css";
-@import "./components/topbar/topbar.css";
-@import url("https://fonts.googleapis.com/css?family=PT+Sans&display=swap");
+@import "https://fonts.googleapis.com/icon?family=Material+Icons";
 
 :root {
   /* Sidebar variables */
@@ -14,33 +12,6 @@
   --topbar-dark-color: #0b3cb8;
 }
 
-* {
-  font-family: "PT Sans", sans-serif;
-}
-
-/* CSS FOR MAIN BODY WRAPPER */
-
-.main-wrapper {
-  background: #ececec;
-  position: fixed;
-  overflow-y: auto;
-  bottom: 0;
-  right: 0;
-  left: var(--sidebar-width);
-  top: var(--topbar-height);
-  transition: all 0.3s ease-in-out;
-}
-
-.main-wrapper.sidebar-hidden {
-  left: 0;
-}
-
-@media (max-width: 600px) {
-  .main-wrapper {
-    left: 0;
-  }
-
-  .main-wrapper.sidebar-hidden {
-    left: var(--sidebar-width);
-  }
+body {
+  background: #ff0000;
 }
