@@ -26,14 +26,24 @@ class Feed extends Component {
 
   componentDidMount() {
     // FETCH THE POSTS HERE
-    this.setState({ posts: [samplePost, samplePost, samplePost, samplePost] });
+    this.setState({
+      posts: [
+        samplePost,
+        samplePost,
+        samplePost,
+        samplePost,
+        samplePost,
+        samplePost,
+        samplePost
+      ]
+    });
   }
 
   render() {
     return (
       <div className="feed-container">
-        {this.state.posts.map(post => (
-          <FeedPost post={post} />
+        {this.state.posts.map((post, index) => (
+          <FeedPost post={post} key={index} />
         ))}
       </div>
     );

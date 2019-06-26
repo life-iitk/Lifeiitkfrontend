@@ -6,22 +6,23 @@ import SideBar from "./components/sidebar/sidebar";
 import TopBar from "./components/topbar/topbar";
 import Main from "./components/main";
 import LoginBox from "./components/login/loginBox";
+import { CssBaseline } from "@material-ui/core";
 
 class App extends Component {
-  // 'icon' property in pages is the FontAwesome icon name.
+  // 'icon' property in pages is the Material Icons icon name.
   constructor() {
     super();
     this.state = {
       pages: [
-        { name: "Feed", icon: "rss" },
-        { name: "Calendar", icon: "calendar" },
+        { name: "Feed", icon: "rss_feed" },
+        { name: "Calendar", icon: "calendar_today" },
         { name: "Map", icon: "map" },
-        { name: "Mess", icon: "cutlery" },
+        { name: "Mess", icon: "restaurant" },
         { name: "Search", icon: "search" },
-        { name: "Profile", icon: "user" }
+        { name: "Profile", icon: "account_circle" }
       ],
       activePage: 0,
-      sidebarActive: true,
+      sidebarActive: false,
       loginBoxOpen: false
     };
   }
@@ -34,35 +35,35 @@ class App extends Component {
     this.setState({ loginBoxOpen: !this.state.loginBoxOpen });
   };
 
-  switchPage = page => {
-    const newActive = this.state.pages.findIndex(pg => pg.name === page.name);
+  switchPage = pgName => {
+    const newActive = this.state.pages.findIndex(pg => pg.name === pgName);
     this.setState({ activePage: newActive });
   };
 
   render() {
     return (
-      <React.Fragment>
+      <div style={{ display: "flex" }}>
+        <CssBaseline />
         <TopBar
-          onSidebarToggle={this.sidebarToggleHandler}
+          toggleSidebar={this.sidebarToggleHandler}
           currentPage={this.state.pages[this.state.activePage]}
+          openLogin={this.loginBoxToggleHandler}
         />
         <SideBar
           pages={this.state.pages}
           activePage={this.state.activePage}
           pageHandler={this.switchPage}
-          active={this.state.sidebarActive}
+          handleToggle={this.sidebarToggleHandler}
+          open={this.state.sidebarActive}
           openLogin={this.loginBoxToggleHandler}
         />
         {/* Container for the main body */}
-        <Main
-          page={this.state.pages[this.state.activePage]}
-          sidebarActive={this.state.sidebarActive}
-        />
+        <Main page={this.state.pages[this.state.activePage]} />
         <LoginBox
           open={this.state.loginBoxOpen}
           onClose={this.loginBoxToggleHandler}
         />
-      </React.Fragment>
+      </div>
     );
   }
 }
