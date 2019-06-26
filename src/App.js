@@ -41,6 +41,7 @@ class App extends Component {
   };
 
   render() {
+    console.log(this.state.activePage);
     return (
       <div style={{ display: "flex" }}>
         <CssBaseline />
