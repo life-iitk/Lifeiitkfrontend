@@ -63,23 +63,27 @@ const useStyles = makeStyles(theme => ({
             if(tag.isSubscribed)
                return { ...tag, isSelected: checked};
             else
-               return { ...tag, isSelected: checked};
+               return { ...tag, isSelected: false};
          }));
       }
       else{
-         console.log("Here");
-         console.log(checked);
          changeTags(tags.map(tag => { return {...tag, isSelected: checked};}));
-         console.log(tags);
       }
    };
    const selectSubscribe = () => {
       toggleSubscribed(true);
-      handleSelectAll(undefined, true);
+      toggleSelectAll(true);
+      changeTags(tags.map(tag => {
+         if(tag.isSubscribed)
+            return { ...tag, isSelected: true};
+         else
+            return { ...tag, isSelected: false};
+         }));
    };
    const handleAll = () => { 
       toggleSubscribed(false);
-      toggleSelectAll(undefined, false);
+      toggleSelectAll(true);
+      changeTags(tags.map(tag => { return {...tag, isSelected: true};}));
     };
 
    return (
