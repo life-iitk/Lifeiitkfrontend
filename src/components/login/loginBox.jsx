@@ -1,4 +1,5 @@
-import React from "react";
+import React,{useState} from "react";
+import axios from 'axios'
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Modal,
@@ -33,6 +34,43 @@ const useStyles = makeStyles(theme => ({
 const LoginBox = props => {
   const [showPwd, setPwdShow] = React.useState(false);
   const classes = useStyles();
+  const [state,setstate] = useState('default');
+  const [state1,setstate1] = useState('');
+  const handleClick = (e)=>{
+    e.preventDefault();
+    var form_data = new FormData();
+    form_data.set('username',state);
+    form_data.set('password',state1);
+    fetch('http://localhost:8000/users/auth/login/', {
+        method: 'POST',
+        body: JSON.stringify({
+                'username' : state,
+                'password' : state1,
+              }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(res => {
+        return res;
+    }).catch(err => err);
+    var qs = require('qs');
+    axios({
+        method: 'post',
+        url: 'http://localhost:8000/users/auth/login/',
+        data: qs.stringify({
+          'username' : state,
+          'password' : state1
+        })
+    });
+  };
+  const func1 = (event)=>{
+  event.preventDefault();
+  setstate(event.target.value);
+  };
+  const func2 = (event)=>{
+  event.preventDefault();
+  setstate1(event.target.value);
+  };
 
   return (
     <Modal
@@ -50,11 +88,11 @@ const LoginBox = props => {
         </Typography>
         <FormControl className={classes.formgroup}>
           <InputLabel>Username</InputLabel>
-          <Input required={true}>Username</Input>
+          <Input required={true} onChange = {func1}>Username</Input>
         </FormControl>
         <FormControl className={classes.formgroup}>
           <InputLabel>Password</InputLabel>
-          <Input
+          <Input onChange = {func2}
             type={showPwd ? "text" : "password"}
             required={true}
             endAdornment={
@@ -70,7 +108,7 @@ const LoginBox = props => {
           />
         </FormControl>
         <br />
-        <Button variant="contained" color="primary" style={{ margin: 10 }}>
+        <Button onClick={handleClick} variant="contained" color="primary" style={{ margin: 10 }}>
           Login
         </Button>
       </div>
