@@ -41,18 +41,18 @@ const PostModal = props => {
     >
       <div className={classes.paper}>
         <CardHeader
-          avatar={<Avatar src={post.club.image} />}
-          title={post.event.title}
-          subheader={post.club.name}
+          avatar={<Avatar src="avatar.png" />}
+          title={post.title}
+          subheader={post.tags[0].name}
         />
         <CardContent style={{ paddingTop: 0 }}>
           <Typography variant="overline">
             <i className="fa fa-calendar-o" />
-            &nbsp;{post.event.dateTime}
+            &nbsp;{post.start_time.slice(0,5)}-{post.end_time.slice(0,5)} | {post.date} | {post.venue}
             <br />
           </Typography>
           <Typography variant="body2" id="simple-modal-description">
-            {post.event.description}
+            {post.description}
           </Typography>
         </CardContent>
       </div>

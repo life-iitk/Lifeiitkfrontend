@@ -22,19 +22,19 @@ const FeedPost = props => {
   return (
     <Card style={{ margin: "10px 10px" }}>
       <CardHeader
-        avatar={<Avatar src={post.club.image} />}
-        title={post.event.title}
-        subheader={post.club.name}
+        avatar={<Avatar src="avatar.png" />}
+        title={post.title}
+        subheader={post.tags[0].name}
       />
 
       <CardContent style={{ padding: "0 16px" }}>
         <Typography variant="overline">
           <i className="fa fa-calendar-o" />
-          &nbsp;{post.event.dateTime}
+          &nbsp;{post.start_time.slice(0,5)}-{post.end_time.slice(0,5)} | {post.date} | {post.venue}
           <br />
         </Typography>
         <Typography component="p" variant="body2">
-          {post.event.summary}
+          {post.summary}
         </Typography>
       </CardContent>
 
