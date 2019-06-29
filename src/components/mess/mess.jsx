@@ -43,6 +43,22 @@ class Mess extends Component {
       selectedDay: day
     });
   };
+
+  handleChange = (event, newValue) => {
+    this.setState({
+      selectedDay: newValue
+    });
+  };
+
+  styles = {
+    slideContainer: {
+      WebkitOverflowScrolling: "touch" // iOS momentum scrolling
+    },
+    slide: {
+      padding: 15
+    }
+  };
+
   renderDesktop = () => {
     return (
       <Card
@@ -51,22 +67,7 @@ class Mess extends Component {
       />
     );
   };
-  handleChange = (event, nv) => {
-    this.setState({
-      selectedDay: nv
-    });
-  };
 
-  styles = {
-    slideContainer: {
-      minHeight: 100,
-      WebkitOverflowScrolling: "touch" // iOS momentum scrolling
-    },
-    slide: {
-      padding: 15,
-      minHeight: 100
-    }
-  };
   renderMobile = () => {
     return (
       <React.Fragment>
@@ -184,16 +185,10 @@ class Mess extends Component {
   };
   render() {
     return (
-      <div className="container-fluid">
+      <div className="container">
         {/* {console.log(this.state.today)} */}
         <div className="row">
-          <div
-            className={
-              this.state.isMobile
-                ? "left-pad-mob col-3 mt-2"
-                : "left-pad-desk col-3 mt-2"
-            }
-          >
+          <div className="left-pad-desk col-3 mt-2">
             <DropdownButton
               id="dropdown-basic-button"
               title={this.state.hallName}
@@ -269,11 +264,7 @@ class Mess extends Component {
 
         <br />
         <div className="row">
-          <h1
-            className={this.state.isMobile ? "left-pad-mob" : "left-pad-desk"}
-          >
-            {this.state.hallName}
-          </h1>
+          <h1 className="left-pad">{this.state.hallName}</h1>
         </div>
         {this.state.isMobile ? this.renderMobile() : this.renderDesktop()}
       </div>

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import FeedPost from "./feedPost";
+import axios from "axios";
 
 // This sample post shows the format the post objects fetched should be converted to.
 // DONT REMOVE this sample post when no longer necessary. It would probably be
@@ -9,10 +10,10 @@ const samplePost = {
     title: "Lecture on Bash and Git",
     summary:
       "This lecture will cover the fundamentals of bash scripting, and will also teach you about the Git version control system.",
-    date = "2019-08-16",
-    start_time = "18:30:00",
-    end_time = "22:00:00",
-    venue = "RM101",
+    date: "2019-08-16",
+    start_time: "18:30:00",
+    end_time: "22:00:00",
+    venue: "RM101",
     description:
       "The topics covered would briefly include introduction to terminal, package managers and the use of Git. It's useful to be familiar with the terminal and the Linux environment for any coding task. Version control tools like Git helps in better flow control and collaboration of code, it is an essential skill."
   },
@@ -24,12 +25,11 @@ const samplePost = {
 
 class Feed extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       posts: []
-    }
+    };
   }
-
 
   componentDidMount() {
     this.getItems();
@@ -48,11 +48,10 @@ class Feed extends Component {
 
   getItems() {
     axios
-      .get("http://localhost:8000/events/feed", {withCredentials: true})
-      .then(res => this.setState({posts:res.data}))
+      .get("http://localhost:8000/events/feed", { withCredentials: true })
+      .then(res => this.setState({ posts: res.data }))
       .catch(err => console.log(err));
-      
-  };
+  }
 
   render() {
     return (
