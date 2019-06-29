@@ -2,8 +2,8 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Feed from "./feed/feed";
 import Mess from "./mess/mess";
+import Profile from "./profile/profile";
 import Calendar from "./calendar/calendar";
-// import Calendar from "react-event-calendar"
 
 const useStyles = makeStyles(theme => ({
   content: {
@@ -24,7 +24,9 @@ const Main = props => {
       case "Mess":
         return <Mess />;
       case "Calendar":
-        return <Calendar />
+        return <Calendar />;
+      case "Profile":
+        return <Profile />;
       default:
         return <Feed />;
     }
