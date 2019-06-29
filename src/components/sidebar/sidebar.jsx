@@ -31,6 +31,12 @@ const useStyles = makeStyles(theme => ({
   },
   drawerPaper: {
     width: drawerWidth
+  },
+  profile: {
+    transition: "all 0.15s ease-in-out",
+    "&:hover": {
+      background: "#ececec"
+    }
   }
 }));
 
@@ -45,7 +51,13 @@ const SideBar = props => {
         </Typography>
       </div>
       <Divider />
-      <div className={classes.profile}>
+      <div
+        className={classes.profile}
+        onClick={() => {
+          props.pageHandler("Profile");
+          if (isMobile) props.handleToggle();
+        }}
+      >
         <CardHeader
           avatar={<Avatar src="profile-pic.png" />}
           title="John Doe"
