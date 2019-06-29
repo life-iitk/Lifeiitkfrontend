@@ -38,28 +38,20 @@
   background-color: #555;
 }
 
-.mob {
-  padding-left: 20px;
-}
-
-.desktop {
-  padding-left: 100px;
-}
-
 @media (min-width: 600px) {
   .card {
     position: absolute;
-    top: 215px;
+    top: 260px;
   }
   .breakfast {
-    left: 100px;
+    left: 270px;
   }
   .lunch {
-    left: 490px;
+    left: 640px;
   }
 
   .dinner {
-    left: 880px;
+    left: 1010px;
   }
 }
 

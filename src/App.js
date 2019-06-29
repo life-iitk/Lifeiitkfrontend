@@ -43,7 +43,12 @@ class App extends Component {
   render() {
     console.log(this.state.activePage);
     return (
-      <div style={{ display: "flex" }}>
+      <div
+        style={{
+          display:
+            this.state.activePage === 3 && window.innerWidth < 600 ? "" : "flex" //overflow in mess ui mobile view
+        }}
+      >
         <CssBaseline />
         <TopBar
           toggleSidebar={this.sidebarToggleHandler}

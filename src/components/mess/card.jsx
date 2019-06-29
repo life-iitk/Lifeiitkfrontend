@@ -11,7 +11,6 @@ const Card = props => {
         lunch: ["dish1", "dish2", "dish3"],
         dinner: ["dish1", "dish2", "dish3"]
       },
-
       {
         title: "Monday",
         breakfast: ["mdish1", "mdish2", "mdish3"],
@@ -57,7 +56,6 @@ const Card = props => {
         lunch: ["dish1", "dish2", "dish3"],
         dinner: ["dish1", "dish2", "dish3"]
       },
-
       {
         title: "Monday",
         breakfast: ["mdish1", "mdish2", "mdish3"],
@@ -103,7 +101,6 @@ const Card = props => {
         lunch: ["dish1", "dish2", "dish3"],
         dinner: ["dish1", "dish2", "dish3"]
       },
-
       {
         title: "Monday",
         breakfast: ["mdish1", "mdish2", "mdish3"],
@@ -149,7 +146,6 @@ const Card = props => {
         lunch: ["dish1", "dish2", "dish3"],
         dinner: ["dish1", "dish2", "dish3"]
       },
-
       {
         title: "Monday",
         breakfast: ["mdish1", "mdish2", "mdish3"],
@@ -195,7 +191,6 @@ const Card = props => {
         lunch: ["dish1", "dish2", "dish3"],
         dinner: ["dish1", "dish2", "dish3"]
       },
-
       {
         title: "Monday",
         breakfast: ["mdish1", "mdish2", "mdish3"],
@@ -241,7 +236,6 @@ const Card = props => {
         lunch: ["dish1", "dish2", "dish3"],
         dinner: ["dish1", "dish2", "dish3"]
       },
-
       {
         title: "Monday",
         breakfast: ["mdish1", "mdish2", "mdish3"],
@@ -284,7 +278,7 @@ const Card = props => {
   return (
     <React.Fragment>
       <div className="row">
-        <h1 className={isMob ? "mob" : "desktop"}>
+        <h1 className="left-pad">
           {elems[props.selectedHall - 1][props.day].title}
         </h1>
       </div>
@@ -298,6 +292,7 @@ const Card = props => {
           })}
         </ol>
       </div>
+      {isMob ? <br /> : ""}
       <div className="lunch card scroll style-1">
         <h2>Lunch</h2>
         <ol>
@@ -306,6 +301,7 @@ const Card = props => {
           })}
         </ol>
       </div>
+      {isMob ? <br /> : ""}
       <div className="dinner card scroll style-1">
         <h2>Dinner</h2>
         <ol>
