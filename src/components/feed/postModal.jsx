@@ -43,12 +43,12 @@ const PostModal = props => {
         <CardHeader
           avatar={<Avatar src="avatar.png" />}
           title={post.title}
-          subheader={post.tag.name}
+          subheader={post.tags[0].name}
         />
         <CardContent style={{ paddingTop: 0 }}>
           <Typography variant="overline">
             <i className="fa fa-calendar-o" />
-            &nbsp;{post.event.start_time.slice(0,5)}-{post.event.end_time.slice(0,5)} | {post.event.date} | {post.event.venue}
+            &nbsp;{post.start_time.slice(0,5)}-{post.end_time.slice(0,5)} | {post.date} | {post.venue}
             <br />
           </Typography>
           <Typography variant="body2" id="simple-modal-description">

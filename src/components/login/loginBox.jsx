@@ -41,18 +41,6 @@ const LoginBox = props => {
     var form_data = new FormData();
     form_data.set('username',state);
     form_data.set('password',state1);
-    // fetch('http://localhost:8000/users/auth/login/', {
-    //     method: 'POST',
-    //     body: JSON.stringify({
-    //             'username' : state,
-    //             'password' : state1,
-    //           }),
-    //     headers: {
-    //         'Content-Type': 'application/json'
-    //     }
-    // }).then(res => {
-    //     return res;
-    // }).catch(err => err);
     var qs = require('qs');
     axios({
         method: 'post',
@@ -63,6 +51,8 @@ const LoginBox = props => {
         }),
         withCredentials: true
     });
+
+    window.location.reload();
   };
   const func1 = (event)=>{
   event.preventDefault();
