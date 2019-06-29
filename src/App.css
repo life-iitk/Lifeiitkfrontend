@@ -3,8 +3,8 @@
 :root {
   /* Sidebar variables */
   --sidebar-width: 125px;
-  --sidebar-bg-color: #354052;
-  --sidebar-dark-color: #2b3444;
+  --sidebar-bg-color: #1a0b4e;
+  --sidebar-dark-color: #0f0531;
   --sidebar-content-color: #c9c9c9;
   /* Topbar variables */
   --topbar-height: 50px;
@@ -12,6 +12,33 @@
   --topbar-dark-color: #0b3cb8;
 }
 
-body {
-  background: #ff0000;
+* {
+  font-family: "PT Sans", sans-serif;
+}
+
+/* CSS FOR MAIN BODY WRAPPER */
+
+.main-wrapper {
+  background: #ececec;
+  position: fixed;
+  overflow-y: auto;
+  bottom: 0;
+  right: 0;
+  left: var(--sidebar-width);
+  top: var(--topbar-height);
+  transition: all 0.3s ease-in-out;
+}
+
+.main-wrapper.sidebar-hidden {
+  left: 0;
+}
+
+@media (max-width: 600px) {
+  .main-wrapper {
+    left: 0;
+  }
+
+  .main-wrapper.sidebar-hidden {
+    left: var(--sidebar-width);
+  }
 }

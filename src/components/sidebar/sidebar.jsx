@@ -31,6 +31,9 @@ const useStyles = makeStyles(theme => ({
   },
   drawerPaper: {
     width: drawerWidth
+  },
+  profile: {
+    cursor: "pointer"
   }
 }));
 
@@ -50,6 +53,10 @@ const SideBar = props => {
           avatar={<Avatar src="profile-pic.png" />}
           title="John Doe"
           subheader="180777"
+          onClick={() => {
+            props.pageHandler("Profile");
+            if (isMobile) props.handleToggle();
+          }}
         />
       </div>
       <Divider />

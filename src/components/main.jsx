@@ -4,7 +4,7 @@ import Feed from "./feed/feed";
 import Mess from "./mess/mess";
 import Calendar from "./calendar/calendar";
 // import Calendar from "react-event-calendar"
-
+import Profile from "./profile/profile"
 const useStyles = makeStyles(theme => ({
   content: {
     flexGrow: 1,
@@ -24,7 +24,9 @@ const Main = props => {
       case "Mess":
         return <Mess />;
       case "Calendar":
-        return <Calendar />
+        return <Calendar />;
+      case "Profile":
+        return <Profile />;
       default:
         return <Feed />;
     }
