@@ -62,8 +62,10 @@ class Calendar extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      events_all: [],
       events: [],
-      date: new Date()
+      date: new Date(),
+      filterBoxOpen: false
     };
     // this.onNavigate.bind(this);
   }
@@ -75,6 +77,7 @@ class Calendar extends Component {
   openFilterBox = () => {
     this.setState({ filterBoxOpen: true });
   };
+
   handleClose = () => {
     this.setState({ filterBoxOpen: false });
   };
@@ -93,7 +96,7 @@ class Calendar extends Component {
           event.start = event.date;
           event.end = event.date;
         });
-        this.setState({ events: events });
+        this.setState({ events_all: events });
       })
       .catch(err => console.log(err));
   }
@@ -109,6 +112,13 @@ class Calendar extends Component {
     this.setState({ date: newDt });
   };
 
+  filterTags = (tags) => {
+    console.log(tags[0].isSelected)
+    console.log(this.state.events_all.length)
+    const filteredEvents = this.state.events_all.filter(event => tags[event.tag_id - 1].isSelected);
+    console.log(filteredEvents);
+    this.setState({events: filteredEvents});
+  };
   render() {
     return (
       <React.Fragment>
@@ -121,7 +131,7 @@ class Calendar extends Component {
             Filter
           </Button>
         </div>
-        {console.log(this.state.events)}
+
         <CalendarBox
           events={this.state.events}
           views={allViews}
@@ -139,7 +149,7 @@ class Calendar extends Component {
           }}
           onNavigate={this.onNavigate}
         />
-        <FilterBox open={this.state.filterBoxOpen} onClose={this.handleClose} />
+        <FilterBox filter={this.filterTags} open={this.state.filterBoxOpen} onClose={this.handleClose}></FilterBox>
       </React.Fragment>
     );
   }
