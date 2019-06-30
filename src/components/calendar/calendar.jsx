@@ -81,7 +81,7 @@ class Calendar extends Component {
 
   getItems(month, year) {
     let url = "http://172.17.76.79:8000/events/view/month";
-    if (month && year) url += `/?month=${month}&year=${year}`;
+    if (month && year) url += `/p?month=${month}&year=${year}`;
     axios
       .get(url, {
         withCredentials: true
