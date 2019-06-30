@@ -5,7 +5,8 @@ import {
   Modal,
   CardHeader,
   Avatar,
-  CardContent
+  CardContent,
+  Chip
 } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
@@ -21,6 +22,9 @@ const useStyles = makeStyles(theme => ({
   },
   cardBody: {
     padding: "0 16px"
+  },
+  chip: {
+    margin: theme.spacing(0.5)
   }
 }));
 
@@ -42,17 +46,34 @@ const PostModal = props => {
       <div className={classes.paper}>
         <CardHeader
           avatar={<Avatar src="avatar.png" />}
-          title={post.title}
-          subheader={post.tag.name}
+          title={post.event.title}
+          subheader={post.event.by}
         />
         <CardContent style={{ paddingTop: 0 }}>
           <Typography variant="overline">
             <i className="fa fa-calendar-o" />
-            &nbsp;{post.event.start_time.slice(0,5)}-{post.event.end_time.slice(0,5)} | {post.event.date} | {post.event.venue}
+            &nbsp;{post.event.start_time.slice(0, 5)}-
+            {post.event.end_time.slice(0, 5)} | {props.dtFormatted} |{" "}
+            {post.event.venue}
             <br />
           </Typography>
-          <Typography variant="body2" id="simple-modal-description">
-            {post.description}
+          {post.tags.map((tag, index) => {
+            return (
+              <Chip
+                color="primary"
+                size="small"
+                key={index}
+                label={tag.name}
+                className={classes.chip}
+              />
+            );
+          })}
+          <Typography
+            variant="body2"
+            id="simple-modal-description"
+            style={{ marginTop: "10px" }}
+          >
+            {post.event.description}
           </Typography>
         </CardContent>
       </div>
