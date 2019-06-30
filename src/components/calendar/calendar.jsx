@@ -31,19 +31,21 @@ const routing = (
 class Calendar extends Component {
     
   state = {
-    events: [
+    events_all : [
       {
         id: 0,
         title: 'All Day Event very long title',
         allDay: true,
         start: new Date(2015, 3, 0),
         end: new Date(2015, 3, 1),
+        tag_id : 1,
       },
       {
         id: 1,
         title: 'Long Event',
         start: new Date(2015, 3, 7),
         end: new Date(2015, 3, 10),
+        tag_id : 2,
       },
       
       {
@@ -51,14 +53,40 @@ class Calendar extends Component {
         title: 'DTS STARTS',
         start: new Date(2016, 2, 13, 0, 0, 0),
         end: new Date(2016, 2, 20, 0, 0, 0),
-      }
+        tag_id : 1,
+      },
+      {
+        id: 3,
+        title: 'New',
+        start: new Date(2015, 3, 7),
+        end: new Date(2015, 3,15),
+        tag_id : 2,
+      },
     ],
-    filterBoxOpen: false
+    events: [
+      {
+         id: 0,
+         title: 'All Day Event very long title',
+         allDay: true,
+         start: new Date(2015, 3, 0),
+         end: new Date(2015, 3, 1),
+      },
+    ],
+    filterBoxOpen: false,
+
   };
+
   openFilterBox = () => {this.setState({filterBoxOpen: true})};
   handleClose = () => {
     this.setState({filterBoxOpen: false});
   }
+  filterTags = (tags) => {
+    console.log(tags[0].isSelected)
+    console.log(this.state.events_all.length)
+    const filteredEvents = this.state.events_all.filter(event => tags[event.tag_id - 1].isSelected);
+    console.log(filteredEvents);
+    this.setState({events: filteredEvents});
+  };
   render() {
     return (
       <React.Fragment>
@@ -73,6 +101,7 @@ class Calendar extends Component {
               Filter
           </Button>
           </div>
+          
         <CalendarBox
           events={this.state.events}
           views={allViews}
@@ -86,7 +115,7 @@ class Calendar extends Component {
           onSelectEvent={(e, event) => { id_fetched = e['id']; console.log(id_fetched); window.location.replace(id_fetched)}}
           //onDrillDown={(e,e1) => {console.log(e);console.log(e1);}}
         />
-        <FilterBox open={this.state.filterBoxOpen} onClose={this.handleClose}></FilterBox>
+        <FilterBox filter={this.filterTags} open={this.state.filterBoxOpen} onClose={this.handleClose}></FilterBox>
       </React.Fragment>
     );
   }

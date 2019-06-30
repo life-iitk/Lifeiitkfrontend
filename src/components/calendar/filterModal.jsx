@@ -7,6 +7,7 @@ import {
   FormControlLabel,
   Checkbox
 } from "@material-ui/core";
+import Calendar from "./calendar";
 
 const useStyles = makeStyles(theme => ({
    paper: {
@@ -48,27 +49,29 @@ const useStyles = makeStyles(theme => ({
    const handleChange = index => (e, data) => {
       toggleSelectAll(false);
       let tempTags = [...tags];
-      let tag = tempTags[index];
-      tempTags[index] = {
-         ...tag,
-         isSelected: data
-      };
+      tempTags[index].isSelected = data;
       changeTags(tempTags);
+      props.filter(tempTags);
    }
 
    const handleSelectAll = (e, checked) => {
       toggleSelectAll(checked);
+      console.log(checked);
+      let newTags = [...tags]
       if(showOnlySubscribed){
-         changeTags(tags.map(tag => {
+         newTags = tags.map(tag => {
             if(tag.isSubscribed)
                return { ...tag, isSelected: checked};
             else
                return { ...tag, isSelected: false};
-         }));
+         });
       }
       else{
-         changeTags(tags.map(tag => { return {...tag, isSelected: checked};}));
+         newTags = tags.map(tag => { return {...tag, isSelected: true}})
       }
+      changeTags(newTags);
+      console.log(newTags);
+      props.filter(newTags);
    };
    const selectSubscribe = () => {
       toggleSubscribed(true);
