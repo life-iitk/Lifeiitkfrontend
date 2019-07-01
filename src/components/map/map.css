@@ -1,0 +1,12 @@
+@media (min-width: 600px) {
+  .leaflet-container {
+    height: 80vh;
+    width: calc(100vw - 300px);
+  }
+}
+@media (max-width: 599px) {
+  .leaflet-container {
+    height: 80vh;
+    width: 94vw;
+  }
+}
