@@ -19,7 +19,8 @@ class App extends Component {
         { name: "Map", icon: "map" },
         { name: "Mess", icon: "restaurant" },
         { name: "Search", icon: "search" },
-        { name: "Profile", icon: "account_circle" }
+        { name: "Profile", icon: "account_circle" },
+        { name: "Admin", icon: "settings" } // Temporary
       ],
       activePage: 0,
       sidebarActive: false,
