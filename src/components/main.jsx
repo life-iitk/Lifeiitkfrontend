@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Feed from "./feed/feed";
 import Mess from "./mess/mess";
 import Profile from "./profile/profile";
+import Admin from "./admin/admin";
 import Calendar from "./calendar/calendar";
 import Map from "./map/map";
 
@@ -30,6 +31,9 @@ const Main = props => {
         return <Profile />;
       case "Map":
         return <Map />;
+      // Temporary - to be replaced with fetched privileges
+      case "Admin":
+        return <Admin />;
       default:
         return <Feed />;
     }
