@@ -28,32 +28,28 @@ const FeedPost = props => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const post = props.post;
-  let dtFormatted = post.event.date.toString();
+  let dtFormatted = post.date.toString();
   dtFormatted = dtFormatted.slice(0, dtFormatted.indexOf("00:00:00") - 5);
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const toggleModal = () => setOpen(!open);
+
   return (
     <Card style={{ margin: "10px 10px" }}>
       <CardHeader
         avatar={<Avatar src="avatar.png" />}
-        title={post.event.title}
-        subheader={post.event.by}
+        title={post.title}
+        subheader={post.by}
       />
 
       <CardContent style={{ padding: "0 16px" }}>
         <Typography variant="overline">
           <i className="fa fa-calendar-o" />
-          &nbsp;{post.event.start_time.slice(0, 5)}-
-          {post.event.end_time.slice(0, 5)} | {dtFormatted} | {post.event.venue}
+          &nbsp;{post.start_time.slice(0, 5)}-{post.end_time.slice(0, 5)} |{" "}
+          {dtFormatted} | {post.venue}
           <br />
         </Typography>
         <Typography component="p" variant="body2">
-          {post.event.summary}
+          {post.summary}
         </Typography>
         {post.tags.map((tag, index) => {
           return (
@@ -69,14 +65,14 @@ const FeedPost = props => {
       </CardContent>
 
       <CardActions>
-        <Button size="small" color="primary" onClick={handleOpen}>
+        <Button size="small" color="primary" onClick={toggleModal}>
           See more
         </Button>
       </CardActions>
 
       <PostModal
         open={open}
-        onClose={handleClose}
+        onClose={toggleModal}
         post={post}
         dtFormatted={dtFormatted}
       />

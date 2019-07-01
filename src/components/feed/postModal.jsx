@@ -46,15 +46,14 @@ const PostModal = props => {
       <div className={classes.paper}>
         <CardHeader
           avatar={<Avatar src="avatar.png" />}
-          title={post.event.title}
-          subheader={post.event.by}
+          title={post.title}
+          subheader={post.by}
         />
         <CardContent style={{ paddingTop: 0 }}>
           <Typography variant="overline">
             <i className="fa fa-calendar-o" />
-            &nbsp;{post.event.start_time.slice(0, 5)}-
-            {post.event.end_time.slice(0, 5)} | {props.dtFormatted} |{" "}
-            {post.event.venue}
+            &nbsp;{post.start_time.slice(0, 5)}-{post.end_time.slice(0, 5)} |{" "}
+            {props.dtFormatted} | {post.venue}
             <br />
           </Typography>
           {post.tags.map((tag, index) => {
@@ -73,7 +72,7 @@ const PostModal = props => {
             id="simple-modal-description"
             style={{ marginTop: "10px" }}
           >
-            {post.event.description}
+            {post.description}
           </Typography>
         </CardContent>
       </div>
