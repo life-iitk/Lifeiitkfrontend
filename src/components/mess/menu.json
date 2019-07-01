@@ -1,0 +1,276 @@
+{
+  "menus": [
+    [
+      {
+        "title": "Monday",
+        "breakfast": [
+          ["<This is Hall 1>Idli", "Banana Chips", "Fried Idli"],
+          []
+        ],
+        "lunch": [["Rajma", "Lemon Rice", "Baigan ka Bharta"], ["Aloo Tikki"]],
+        "dinner": [
+          ["Kathal Kofta", "Sweet Kheer", "Paratha"],
+          ["Chicken Biryani"]
+        ]
+      },
+      {
+        "title": "Tuesday",
+        "breakfast": [["Idli", "Banana Chips", "Fried Idli"], []],
+        "lunch": [["Rajma", "Lemon Rice", "Baigan ka Bharta"], ["Aloo Tikki"]],
+        "dinner": [
+          ["Kathal Kofta", "Sweet Kheer", "Paratha"],
+          ["Chicken Biryani"]
+        ]
+      },
+      {
+        "title": "Wednesday",
+        "breakfast": [["Idli", "Banana Chips", "Fried Idli"], []],
+        "lunch": [["Rajma", "Lemon Rice", "Baigan ka Bharta"], ["Aloo Tikki"]],
+        "dinner": [
+          ["Kathal Kofta", "Sweet Kheer", "Paratha"],
+          ["Chicken Biryani"]
+        ]
+      },
+      {
+        "title": "Thursday",
+        "breakfast": [["Idli", "Banana Chips", "Fried Idli"], []],
+        "lunch": [["Rajma", "Lemon Rice", "Baigan ka Bharta"], ["Aloo Tikki"]],
+        "dinner": [
+          ["Kathal Kofta", "Sweet Kheer", "Paratha"],
+          ["Chicken Biryani"]
+        ]
+      },
+      {
+        "title": "Friday",
+        "breakfast": [["Idli", "Banana Chips", "Fried Idli"], []],
+        "lunch": [["Rajma", "Lemon Rice", "Baigan ka Bharta"], ["Aloo Tikki"]],
+        "dinner": [
+          ["Kathal Kofta", "Sweet Kheer", "Paratha"],
+          ["Chicken Biryani"]
+        ]
+      },
+      {
+        "title": "Saturday",
+        "breakfast": [["Idli", "Banana Chips", "Fried Idli"], []],
+        "lunch": [["Rajma", "Lemon Rice", "Baigan ka Bharta"], ["Aloo Tikki"]],
+        "dinner": [
+          ["Kathal Kofta", "Sweet Kheer", "Paratha"],
+          ["Chicken Biryani"]
+        ]
+      },
+      {
+        "title": "Sunday",
+        "breakfast": [["Idli", "Banana Chips", "Fried Idli"], []],
+        "lunch": [["Rajma", "Lemon Rice", "Baigan ka Bharta"], ["Aloo Tikki"]],
+        "dinner": [
+          ["Kathal Kofta", "Sweet Kheer", "Paratha"],
+          ["Chicken Biryani"]
+        ]
+      }
+    ],
+    [
+      {
+        "title": "Monday",
+        "breakfast": [
+          ["<This is Hall 2>Idli", "Banana Chips", "Fried Idli"],
+          []
+        ],
+        "lunch": [["Rajma", "Lemon Rice", "Baigan ka Bharta"], ["Aloo Tikki"]],
+        "dinner": [
+          ["Kathal Kofta", "Sweet Kheer", "Paratha"],
+          ["Chicken Biryani"]
+        ]
+      },
+      {
+        "title": "Tuesday",
+        "breakfast": [["Idli", "Banana Chips", "Fried Idli"], []],
+        "lunch": [["Rajma", "Lemon Rice", "Baigan ka Bharta"], ["Aloo Tikki"]],
+        "dinner": [
+          ["Kathal Kofta", "Sweet Kheer", "Paratha"],
+          ["Chicken Biryani"]
+        ]
+      },
+      {
+        "title": "Wednesday",
+        "breakfast": [["Idli", "Banana Chips", "Fried Idli"], []],
+        "lunch": [["Rajma", "Lemon Rice", "Baigan ka Bharta"], ["Aloo Tikki"]],
+        "dinner": [
+          ["Kathal Kofta", "Sweet Kheer", "Paratha"],
+          ["Chicken Biryani"]
+        ]
+      },
+      {
+        "title": "Thursday",
+        "breakfast": [["Idli", "Banana Chips", "Fried Idli"], []],
+        "lunch": [["Rajma", "Lemon Rice", "Baigan ka Bharta"], ["Aloo Tikki"]],
+        "dinner": [
+          ["Kathal Kofta", "Sweet Kheer", "Paratha"],
+          ["Chicken Biryani"]
+        ]
+      },
+      {
+        "title": "Friday",
+        "breakfast": [["Idli", "Banana Chips", "Fried Idli"], []],
+        "lunch": [["Rajma", "Lemon Rice", "Baigan ka Bharta"], ["Aloo Tikki"]],
+        "dinner": [
+          ["Kathal Kofta", "Sweet Kheer", "Paratha"],
+          ["Chicken Biryani"]
+        ]
+      },
+      {
+        "title": "Saturday",
+        "breakfast": [["Idli", "Banana Chips", "Fried Idli"], []],
+        "lunch": [["Rajma", "Lemon Rice", "Baigan ka Bharta"], ["Aloo Tikki"]],
+        "dinner": [
+          ["Kathal Kofta", "Sweet Kheer", "Paratha"],
+          ["Chicken Biryani"]
+        ]
+      },
+      {
+        "title": "Sunday",
+        "breakfast": [["Idli", "Banana Chips", "Fried Idli"], []],
+        "lunch": [["Rajma", "Lemon Rice", "Baigan ka Bharta"], ["Aloo Tikki"]],
+        "dinner": [
+          ["Kathal Kofta", "Sweet Kheer", "Paratha"],
+          ["Chicken Biryani"]
+        ]
+      }
+    ],
+    [
+      {
+        "title": "Monday",
+        "breakfast": [
+          ["<This is Hall 3>Idli", "Banana Chips", "Fried Idli"],
+          []
+        ],
+        "lunch": [["Rajma", "Lemon Rice", "Baigan ka Bharta"], ["Aloo Tikki"]],
+        "dinner": [
+          ["Kathal Kofta", "Sweet Kheer", "Paratha"],
+          ["Chicken Biryani"]
+        ]
+      },
+      {
+        "title": "Tuesday",
+        "breakfast": [["Idli", "Banana Chips", "Fried Idli"], []],
+        "lunch": [["Rajma", "Lemon Rice", "Baigan ka Bharta"], ["Aloo Tikki"]],
+        "dinner": [
+          ["Kathal Kofta", "Sweet Kheer", "Paratha"],
+          ["Chicken Biryani"]
+        ]
+      },
+      {
+        "title": "Wednesday",
+        "breakfast": [["Idli", "Banana Chips", "Fried Idli"], []],
+        "lunch": [["Rajma", "Lemon Rice", "Baigan ka Bharta"], ["Aloo Tikki"]],
+        "dinner": [
+          ["Kathal Kofta", "Sweet Kheer", "Paratha"],
+          ["Chicken Biryani"]
+        ]
+      },
+      {
+        "title": "Thursday",
+        "breakfast": [["Idli", "Banana Chips", "Fried Idli"], []],
+        "lunch": [["Rajma", "Lemon Rice", "Baigan ka Bharta"], ["Aloo Tikki"]],
+        "dinner": [
+          ["Kathal Kofta", "Sweet Kheer", "Paratha"],
+          ["Chicken Biryani"]
+        ]
+      },
+      {
+        "title": "Friday",
+        "breakfast": [["Idli", "Banana Chips", "Fried Idli"], []],
+        "lunch": [["Rajma", "Lemon Rice", "Baigan ka Bharta"], ["Aloo Tikki"]],
+        "dinner": [
+          ["Kathal Kofta", "Sweet Kheer", "Paratha"],
+          ["Chicken Biryani"]
+        ]
+      },
+      {
+        "title": "Saturday",
+        "breakfast": [["Idli", "Banana Chips", "Fried Idli"], []],
+        "lunch": [["Rajma", "Lemon Rice", "Baigan ka Bharta"], ["Aloo Tikki"]],
+        "dinner": [
+          ["Kathal Kofta", "Sweet Kheer", "Paratha"],
+          ["Chicken Biryani"]
+        ]
+      },
+      {
+        "title": "Sunday",
+        "breakfast": [["Idli", "Banana Chips", "Fried Idli"], []],
+        "lunch": [["Rajma", "Lemon Rice", "Baigan ka Bharta"], ["Aloo Tikki"]],
+        "dinner": [
+          ["Kathal Kofta", "Sweet Kheer", "Paratha"],
+          ["Chicken Biryani"]
+        ]
+      }
+    ],
+    [
+      {
+        "title": "Monday",
+        "breakfast": [
+          ["<This is Hall 3>Idli", "Banana Chips", "Fried Idli"],
+          []
+        ],
+        "lunch": [["Rajma", "Lemon Rice", "Baigan ka Bharta"], ["Aloo Tikki"]],
+        "dinner": [
+          ["Kathal Kofta", "Sweet Kheer", "Paratha"],
+          ["Chicken Biryani"]
+        ]
+      },
+      {
+        "title": "Tuesday",
+        "breakfast": [["Idli", "Banana Chips", "Fried Idli"], []],
+        "lunch": [["Rajma", "Lemon Rice", "Baigan ka Bharta"], ["Aloo Tikki"]],
+        "dinner": [
+          ["Kathal Kofta", "Sweet Kheer", "Paratha"],
+          ["Chicken Biryani"]
+        ]
+      },
+      {
+        "title": "Wednesday",
+        "breakfast": [["Idli", "Banana Chips", "Fried Idli"], []],
+        "lunch": [["Rajma", "Lemon Rice", "Baigan ka Bharta"], ["Aloo Tikki"]],
+        "dinner": [
+          ["Kathal Kofta", "Sweet Kheer", "Paratha"],
+          ["Chicken Biryani"]
+        ]
+      },
+      {
+        "title": "Thursday",
+        "breakfast": [["Idli", "Banana Chips", "Fried Idli"], []],
+        "lunch": [["Rajma", "Lemon Rice", "Baigan ka Bharta"], ["Aloo Tikki"]],
+        "dinner": [
+          ["Kathal Kofta", "Sweet Kheer", "Paratha"],
+          ["Chicken Biryani"]
+        ]
+      },
+      {
+        "title": "Friday",
+        "breakfast": [["Idli", "Banana Chips", "Fried Idli"], []],
+        "lunch": [["Rajma", "Lemon Rice", "Baigan ka Bharta"], ["Aloo Tikki"]],
+        "dinner": [
+          ["Kathal Kofta", "Sweet Kheer", "Paratha"],
+          ["Chicken Biryani"]
+        ]
+      },
+      {
+        "title": "Saturday",
+        "breakfast": [["Idli", "Banana Chips", "Fried Idli"], []],
+        "lunch": [["Rajma", "Lemon Rice", "Baigan ka Bharta"], ["Aloo Tikki"]],
+        "dinner": [
+          ["Kathal Kofta", "Sweet Kheer", "Paratha"],
+          ["Chicken Biryani"]
+        ]
+      },
+      {
+        "title": "Sunday",
+        "breakfast": [["Idli", "Banana Chips", "Fried Idli"], []],
+        "lunch": [["Rajma", "Lemon Rice", "Baigan ka Bharta"], ["Aloo Tikki"]],
+        "dinner": [
+          ["Kathal Kofta", "Sweet Kheer", "Paratha"],
+          ["Chicken Biryani"]
+        ]
+      }
+    ]
+  ]
+}
