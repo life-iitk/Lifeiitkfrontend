@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Paper, Tab, Tabs } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import AcadSection from "./acads/acads";
 import UserInfo from "./userInfo";
+import axios from 'axios';
+axios.defaults.xsrfCookieName = 'csrftoken'
+axios.defaults.xsrfHeaderName = "X-CSRFTOKEN"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -33,25 +36,54 @@ export default function Profile() {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const changePage = (e, newPg) => setPage(newPg);
+  const [details, setDetails] = useState({})
 
-  const [courses, setCourses] = React.useState([
-    { code: "MTH101", name: "Mathematics - I" },
-    { code: "PHY101", name: "Physics Laboratory" },
-    { code: "ESC101", name: "Fundamentals of Computer Science" }
-  ]);
+  useEffect(() => {
+    axios
+    .get("http://localhost:8000/users/profile",{ withCredentials: true })
+    .then(res => setDetails(res.data))
+    .catch(err => console.log(err))
+  }, []);//Pass acads array to acads portion and rest to profile section
+
+
+
+  // const [courses, setCourses] = React.useState([
+  //   { code: "MTH101", name: "Mathematics - I" },
+  //   { code: "PHY101", name: "Physics Laboratory" },
+  //   { code: "ESC101", name: "Fundamentals of Computer Science" }
+  // ]);
 
   const addCourse = courseCode => {
-    if (courses.find(course => course.code === courseCode)) {
+    if (details.acads.find(course => course.code === courseCode)) {
       console.log("Course already exists");
       return true;
     } else {
-      // Send API call here
-      const newCourses = [...courses];
-      newCourses.push({ code: courseCode, name: "Something something" });
-      setCourses(newCourses);
+      axios({
+        method: 'put',
+        url: 'http://localhost:8000/users/acads/',
+        data : { "code":courseCode},
+        withCredentials: true,
+      })
+      .then(res => console.log(res.data))
+      .catch(err => console.log(err))
+
+      // const newDetails = {...details};
+      // newDetails.acads.push({code: courseCode, name: "Something"})
+      // setDetails(newDetails);
+
+      axios
+      .get("http://localhost:8000/users/acads", { withCredentials:true })
+      .then(res => setDetails(res.data))
+      .catch(err => console.log(err))
+      
       return false;
     }
   };
+
+  const renderPage = page => {
+    if (page === 0) return <UserInfo details={details}/>
+    else return <AcadSection courses={details.acads} addCourse={addCourse} />
+  }
 
   return (
     <div className={classes.root}>
@@ -66,11 +98,7 @@ export default function Profile() {
           <Tab label="Academics" />
         </Tabs>
       </Paper>
-      {page === 0 ? (
-        <UserInfo />
-      ) : (
-        <AcadSection courses={courses} addCourse={addCourse} />
-      )}
+      {details.roll && renderPage(page)}
     </div>
   );
 }

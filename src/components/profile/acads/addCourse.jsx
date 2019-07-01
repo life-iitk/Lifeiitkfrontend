@@ -25,7 +25,7 @@ const AddCourse = props => {
   const classes = useStyles();
   const [show, setShow] = React.useState(false);
   const [dept, setDept] = React.useState("MTH");
-  const [code, setCode] = React.useState(courseData[dept][0]);
+  const [course_id, setCourseID] = React.useState(courseData[dept][0]);
 
   return (
     <Card style={{ margin: "10px 0" }}>
@@ -47,13 +47,13 @@ const AddCourse = props => {
         {/* Set course code */}
         <FormControl className={classes.input}>
           <Select
-            value={code}
-            inputProps={{ name: "code" }}
-            onChange={e => setCode(e.target.value)}
+            value={course_id}
+            inputProps={{ name: "course_id" }}
+            onChange={e => setCourseID(e.target.value)}
           >
-            {courseData[dept].map((code, index) => (
-              <MenuItem key={index} value={code}>
-                {code}
+            {courseData[dept].map((course_id, index) => (
+              <MenuItem key={index} value={course_id}>
+                {course_id}
               </MenuItem>
             ))}
           </Select>
@@ -62,7 +62,7 @@ const AddCourse = props => {
           <Fab color="primary" size="small">
             <AddIcon
               onClick={() => {
-                const exists = props.add(dept + code);
+                const exists = props.add(dept + course_id);
                 setShow(exists);
               }}
             />

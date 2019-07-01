@@ -75,11 +75,11 @@ const UserInfo = props => {
               fullWidth
             >
               <Grid item>{/* <PersonIcon /> */}</Grid>
-              <Grid item>ABC XYZ</Grid>
+              <Grid item>{props.details.name}</Grid>
             </Grid>
             <Grid container direction="row" alignItems="center" spacing={1}>
               <Grid item>{/* <RollNoIcon /> */}</Grid>
-              <Grid item>180000</Grid>
+              <Grid item>{props.details.roll}</Grid>
             </Grid>
             <Grid
               container
@@ -90,34 +90,34 @@ const UserInfo = props => {
             >
               <Grid item>{/* <DepartmentIcon /> */}</Grid>
               <Grid item>
-                <Typography>Biological Sciences and Bio Engineering</Typography>
+                <Typography>{props.details.dept}</Typography>
               </Grid>
             </Grid>
             <Grid container direction="row" alignItems="center" spacing={1}>
               <Grid item>{/* <AddressIcon /> */}</Grid>
-              <Grid item>A-000, Hall 00</Grid>
+              <Grid item>{props.details.room}, {props.details.hall}</Grid>
             </Grid>
             <Grid container direction="row" alignItems="center" spacing={1}>
               <Grid item>{/* <HomeTownIcon /> */}</Grid>
-              <Grid item>Kanpur, U.P.</Grid>
+              <Grid item>{props.details.hometown}</Grid>
             </Grid>
             <Grid container direction="row" alignItems="center" spacing={1}>
               <Grid item>{/* <BloodGroupIcon /> */}</Grid>
-              <Grid item>A+</Grid>
+              <Grid item>{props.details.blood_group}</Grid>
             </Grid>
             <Grid container direction="row" alignItems="center" spacing={1}>
               <Grid item>{/* <EmailIcon /> */}</Grid>
-              <Grid item>abc@iitk.ac.in</Grid>
+              <Grid item>{props.details.username}@iitk.ac.in</Grid>
             </Grid>
           </Paper>
         </Grid>
       </Grid>
       <Grid direction="column">
         <Grid item>
-          <Por />
+          <Por pors = {props.details.por} />  
         </Grid>
         <Grid item>
-          <Tags />
+          <Tags tags = {props.details.tags}/>
         </Grid>
       </Grid>
     </React.Fragment>

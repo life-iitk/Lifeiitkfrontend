@@ -17,7 +17,7 @@ const useStyles = makeStyles({
   }
 });
 
-export default function Por() {
+export default function Por(props) {
   const classes = useStyles();
 
   function BadgeIcon(props) {
@@ -34,32 +34,22 @@ export default function Por() {
         <Typography variant="h5" component="h2" className={classes.typo}>
           Positions Of Responsibility
         </Typography>
-        <Grid container 
-            direction="row"
-            alignItems="center"
-            spacing = {1}
-            fullWidth
-        >
-            <Grid item justify="center">
-            <BadgeIcon />
-            </Grid>
-            <Grid item justify="center">
-                Secretary, Programming Club
-            </Grid>
-        </Grid>  
-        <Grid container 
-            direction="row"
-            alignItems="center"
-            spacing = {1}
-            fullWidth
-        >
-            <Grid item justify="center">
-            <BadgeIcon />
-            </Grid>
-            <Grid item justify="center">
-                Secretary, Aeromodelling Club
-            </Grid>
-        </Grid>  
+        {Object.keys(props.pors).map((club, index) => (
+          <Grid container 
+          direction="row"
+          alignItems="center"
+          spacing = {1}
+          key={index}
+          fullWidth
+      >
+          <Grid item justify="center">
+          <BadgeIcon />
+          </Grid>
+          <Grid item justify="center">
+             {props.pors[club]}, {club}
+          </Grid>
+      </Grid>   
+        ))}
       </CardContent>
     </Card>
   );
