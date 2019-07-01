@@ -4,6 +4,7 @@ import Feed from "./feed/feed";
 import Mess from "./mess/mess";
 import Profile from "./profile/profile";
 import Calendar from "./calendar/calendar";
+import Map from "./map/map";
 
 const useStyles = makeStyles(theme => ({
   content: {
@@ -27,6 +28,8 @@ const Main = props => {
         return <Calendar />;
       case "Profile":
         return <Profile />;
+      case "Map":
+        return <Map />;
       default:
         return <Feed />;
     }
