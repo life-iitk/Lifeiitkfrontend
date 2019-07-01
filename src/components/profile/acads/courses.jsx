@@ -22,7 +22,7 @@ const AcadProfile = props => {
                   <ChevronRightIcon />
                 </Avatar>
               </ListItemAvatar>
-              <ListItemText primary={course.code} secondary={course.name} />
+              <ListItemText primary={course.name} secondary={course.code} />
             </ListItem>
           ))}
         </List>
