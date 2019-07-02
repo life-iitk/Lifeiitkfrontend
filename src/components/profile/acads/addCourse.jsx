@@ -11,6 +11,7 @@ import {
 import AddIcon from "@material-ui/icons/Add";
 import { makeStyles } from "@material-ui/core/styles";
 import courseData from "./courses.json";
+import axios from "axios";
 
 const useStyles = makeStyles(theme => ({
   input: {
@@ -22,6 +23,34 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const AddCourse = props => {
+  var CourseData = JSON.stringify("{}");
+  axios.get("http://localhost:8000/acads/all/").then(
+    response => {
+      CourseData = response.data;
+      const CourseData1 = CourseData.map(function(e) {
+        var regex = /[\d]+/g;
+        var i = e.code.search(regex);
+        e["dept"]=e.code.substring(0,i);
+        e["code"]=e.code.substring(i);
+        return e;
+      });
+      var CourseData2 = {};
+      CourseData1.forEach(myFunction);
+      function myFunction(item)
+      {
+        if(!CourseData2.hasOwnProperty(item.dept)){
+          CourseData2[item.dept]=[item];
+        }
+        else{
+          CourseData2[item.dept].push(item);
+        }
+      }
+      console.log(CourseData2);
+    }
+  )
+  .catch(function (error) {
+    console.log(error);
+  });
   const classes = useStyles();
   const [show, setShow] = React.useState(false);
   const [dept, setDept] = React.useState("MTH");
