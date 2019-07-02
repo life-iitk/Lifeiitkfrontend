@@ -1,5 +1,9 @@
-{
-  "MTH": [101, 102],
-  "PHY": [101, 102, 103],
-  "ESC": [101, 201]
-}
+[
+  { "course_id": 1, "name": "Maths - I", "code": "MTH101" },
+  { "course_id": 2, "name": "Maths - II", "code": "MTH102" },
+  { "course_id": 3, "name": "Mechanics", "code": "PHY102" },
+  { "course_id": 4, "name": "Electrodynamics", "code": "PHY103" },
+  { "course_id": 5, "name": "Physics Lab", "code": "PHY101" },
+  { "course_id": 6, "name": "Language", "code": "ENG124" },
+  { "course_id": 7, "name": "Computing", "code": "ESC101" }
+]

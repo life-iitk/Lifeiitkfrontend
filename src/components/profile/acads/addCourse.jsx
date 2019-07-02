@@ -10,7 +10,6 @@ import {
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import { makeStyles } from "@material-ui/core/styles";
-import courseData from "./courses.json";
 import axios from "axios";
 
 const useStyles = makeStyles(theme => ({
@@ -22,41 +21,38 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const AddCourse = props => {
-  var CourseData = JSON.stringify("{}");
-  axios.get("http://localhost:8000/acads/all/").then(
-    response => {
-      CourseData = response.data;
-      const CourseData1 = CourseData.map(function(e) {
-        var regex = /[\d]+/g;
-        var i = e.code.search(regex);
-        e["dept"]=e.code.substring(0,i);
-        e["code"]=e.code.substring(i);
-        return e;
-      });
-      var CourseData2 = {};
-      CourseData1.forEach(myFunction);
-      function myFunction(item)
-      {
-        if(!CourseData2.hasOwnProperty(item.dept)){
-          CourseData2[item.dept]=[item];
-        }
-        else{
-          CourseData2[item.dept].push(item);
-        }
-      }
-      console.log(CourseData2);
-    }
-  )
-  .catch(function (error) {
-    console.log(error);
+const getCourses = async () => {
+  // const response = { data: require("./courses.json") };
+  const response = await axios.get("http://localhost:8000/acads/all/");
+  const courseData1 = response.data.map(e => {
+    const regex = /[\d]+/g;
+    const i = e.code.search(regex);
+    e["dept"] = e.code.substring(0, i);
+    e["code"] = e.code.substring(i);
+    return e;
   });
+  const courseData2 = {};
+  courseData1.forEach(item => {
+    if (!courseData2.hasOwnProperty(item.dept)) {
+      courseData2[item.dept] = [item];
+    } else {
+      courseData2[item.dept].push(item);
+    }
+  });
+  return courseData2;
+};
+
+const AddCourse = props => {
   const classes = useStyles();
+  const [courseData, setCourseData] = React.useState(getCourses());
   const [show, setShow] = React.useState(false);
   const [dept, setDept] = React.useState("MTH");
-  const [course_id, setCourseID] = React.useState(courseData[dept][0]);
+  const [code, setCode] = React.useState("101");
+  getCourses().then(courses => setCourseData(courses));
 
-  return (
+  return !Object.keys(courseData) ? (
+    "Loading..."
+  ) : (
     <Card style={{ margin: "10px 0" }}>
       <CardContent>
         {/* Set departments */}
@@ -76,13 +72,13 @@ const AddCourse = props => {
         {/* Set course code */}
         <FormControl className={classes.input}>
           <Select
-            value={course_id}
+            value={code}
             inputProps={{ name: "course_id" }}
-            onChange={e => setCourseID(e.target.value)}
+            onChange={e => setCode(e.target.value)}
           >
-            {courseData[dept].map((course_id, index) => (
-              <MenuItem key={index} value={course_id}>
-                {course_id}
+            {courseData[dept].map((code, index) => (
+              <MenuItem key={index} value={code.code}>
+                {code.code}
               </MenuItem>
             ))}
           </Select>
@@ -91,7 +87,7 @@ const AddCourse = props => {
           <Fab color="primary" size="small">
             <AddIcon
               onClick={() => {
-                const exists = props.add(dept + course_id);
+                const exists = props.add(dept + code.code);
                 setShow(exists);
               }}
             />
