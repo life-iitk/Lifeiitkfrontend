@@ -6,9 +6,12 @@ import {
   ListItem,
   ListItemAvatar,
   ListItemText,
+  ListItemSecondaryAction,
+  IconButton,
   Avatar
 } from "@material-ui/core";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 const Courses = props => {
   return (
@@ -23,6 +26,14 @@ const Courses = props => {
                 </Avatar>
               </ListItemAvatar>
               <ListItemText primary={course.name} secondary={course.code} />
+              <ListItemSecondaryAction>
+                <IconButton
+                  edge="end"
+                  onClick={() => props.delete(course.code)}
+                >
+                  <DeleteIcon />
+                </IconButton>
+              </ListItemSecondaryAction>
             </ListItem>
           ))}
         </List>
