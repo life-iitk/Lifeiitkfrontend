@@ -31,7 +31,7 @@ const EventCard = props => {
   const [delOpen, setDelOpen] = React.useState(false);
   const post = props.post;
   let dtFormatted = post.date.toString();
-  dtFormatted = dtFormatted.slice(0, dtFormatted.indexOf("00:00:00") - 5);
+  dtFormatted = dtFormatted.slice(0, dtFormatted.indexOf(":") - 7);
 
   const togglePost = () => setPostOpen(!postOpen);
   const toggleDelBox = () => setDelOpen(!delOpen);
@@ -41,7 +41,7 @@ const EventCard = props => {
       <CardHeader
         avatar={<Avatar src="avatar.png" />}
         title={post.title}
-        subheader={post.by}
+        subheader={post.tags[0].name}
       />
 
       <CardContent style={{ padding: "0 16px" }}>
@@ -54,13 +54,13 @@ const EventCard = props => {
         <Typography component="p" variant="body2">
           {post.summary}
         </Typography>
-        {post.tags.map((tag, index) => {
+        {post.hash_tags.map((tag, index) => {
           return (
             <Chip
               color="primary"
               size="small"
               key={index}
-              label={tag.name}
+              label={tag}
               className={classes.chip}
             />
           );
