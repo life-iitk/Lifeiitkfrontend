@@ -3,9 +3,9 @@ import { Paper, Tab, Tabs } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import AcadSection from "./acads/acads";
 import UserInfo from "./userInfo";
-import axios from 'axios';
-axios.defaults.xsrfCookieName = 'csrftoken'
-axios.defaults.xsrfHeaderName = "X-CSRFTOKEN"
+import axios from "axios";
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -36,16 +36,14 @@ export default function Profile() {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const changePage = (e, newPg) => setPage(newPg);
-  const [details, setDetails] = useState({})
+  const [details, setDetails] = useState({ acads: [] });
 
   useEffect(() => {
     axios
-    .get("http://localhost:8000/users/profile",{ withCredentials: true })
-    .then(res => setDetails(res.data))
-    .catch(err => console.log(err))
-  }, []);//Pass acads array to acads portion and rest to profile section
-
-
+      .get("http://localhost:8000/users/profile", { withCredentials: true })
+      .then(res => setDetails(res.data))
+      .catch(err => console.log(err));
+  }, []); //Pass acads array to acads portion and rest to profile section
 
   // const [courses, setCourses] = React.useState([
   //   { code: "MTH101", name: "Mathematics - I" },
@@ -59,31 +57,31 @@ export default function Profile() {
       return true;
     } else {
       axios({
-        method: 'put',
-        url: 'http://localhost:8000/users/acads/',
-        data : { "code":courseCode},
-        withCredentials: true,
+        method: "put",
+        url: "http://localhost:8000/users/acads/",
+        data: { code: courseCode },
+        withCredentials: true
       })
-      .then(res => console.log(res.data))
-      .catch(err => console.log(err))
+        .then(res => console.log(res.data))
+        .catch(err => console.log(err));
 
-      // const newDetails = {...details};
-      // newDetails.acads.push({code: courseCode, name: "Something"})
+      // const newDetails = { ...details };
+      // newDetails.acads.push({ code: courseCode, name: "Something" });
       // setDetails(newDetails);
 
       axios
-      .get("http://localhost:8000/users/acads", { withCredentials:true })
-      .then(res => setDetails(res.data))
-      .catch(err => console.log(err))
-      
+        .get("http://localhost:8000/users/acads", { withCredentials: true })
+        .then(res => setDetails(res.data))
+        .catch(err => console.log(err));
+
       return false;
     }
   };
 
   const renderPage = page => {
-    if (page === 0) return <UserInfo details={details}/>
-    else return <AcadSection courses={details.acads} addCourse={addCourse} />
-  }
+    if (page === 0) return <UserInfo details={details} />;
+    else return <AcadSection courses={details.acads} addCourse={addCourse} />;
+  };
 
   return (
     <div className={classes.root}>

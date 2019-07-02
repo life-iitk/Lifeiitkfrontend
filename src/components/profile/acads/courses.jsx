@@ -10,7 +10,7 @@ import {
 } from "@material-ui/core";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 
-const AcadProfile = props => {
+const Courses = props => {
   return (
     <Card style={{ margin: "10px 0" }}>
       <CardContent>
@@ -31,4 +31,4 @@ const AcadProfile = props => {
   );
 };
 
-export default AcadProfile;
+export default Courses;
