@@ -47,7 +47,7 @@ const PostModal = props => {
         <CardHeader
           avatar={<Avatar src="avatar.png" />}
           title={post.title}
-          subheader={post.by}
+          subheader={post.tags[0].name}
         />
         <CardContent style={{ paddingTop: 0 }}>
           <Typography variant="overline">
@@ -56,13 +56,13 @@ const PostModal = props => {
             {props.dtFormatted} | {post.venue}
             <br />
           </Typography>
-          {post.tags.map((tag, index) => {
+          {post.hash_tags.map((tag, index) => {
             return (
               <Chip
                 color="primary"
                 size="small"
                 key={index}
-                label={tag.name}
+                label={tag}
                 className={classes.chip}
               />
             );

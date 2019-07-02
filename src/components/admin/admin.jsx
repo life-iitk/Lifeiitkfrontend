@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import CreateEvent from "./createEvent";
 import EventCard from "./eventCard";
+import { Fab } from "@material-ui/core";
+import AddIcon from "@material-ui/icons/Add";
 
 // Sample post for frontend testing
 const samplePost = {
@@ -8,19 +10,15 @@ const samplePost = {
   title: "Lecture on Bash and Git",
   summary:
     "This lecture will cover the fundamentals of bash scripting, and will also teach you about the Git version control system.",
-  date: "2019-08-16",
-  by: "Programming Club",
+  date: new Date(2019, 7, 16),
+  tags: [{ name: "Programming Club", tag_id: 1, description: "SnT Club" }],
   start_time: "18:30:00",
   end_time: "22:00:00",
   venue: "RM101",
   day_long: false,
   description:
     "The topics covered would briefly include introduction to terminal, package managers and the use of Git. It's useful to be familiar with the terminal and the Linux environment for any coding task. Version control tools like Git helps in better flow control and collaboration of code, it is an essential skill.",
-  tags: [
-    { name: "PClub", tag_id: 1, description: "SnT Club" },
-    { name: "Git", tag_id: 2, description: "Version control system" },
-    { name: "Bash", tag_id: 3, description: "Default shell for linux" }
-  ]
+  hash_tags: ["PClub", "Git", "Bash"]
 };
 
 class Admin extends Component {
@@ -38,7 +36,7 @@ class Admin extends Component {
     this.setState({
       privilege: {
         user: "user",
-        tag: { tag_id: 1, name: "Programming Club", description: "Club" }
+        tag: [{ tag_id: 1, name: "Programming Club", description: "Club" }]
       },
       events: new Array(3).fill(samplePost)
     });
@@ -49,7 +47,12 @@ class Admin extends Component {
   };
 
   createEvent = data => {
-    console.log(data);
+    this.setState({ createBoxOpen: false });
+    data.tags = this.state.privilege.tag;
+    data.date = new Date(data.date);
+    const newEvents = [...this.state.events];
+    newEvents.push(data);
+    this.setState({ events: newEvents });
   };
 
   deleteEvent = id => {
@@ -61,8 +64,8 @@ class Admin extends Component {
   };
 
   renderPosts = () => {
-    return this.state.events.map(event => (
-      <EventCard post={event} delete={this.deleteEvent} />
+    return this.state.events.map((event, index) => (
+      <EventCard post={event} delete={this.deleteEvent} key={index} />
     ));
   };
 
@@ -70,6 +73,14 @@ class Admin extends Component {
     return (
       <React.Fragment>
         {!!this.state.events && this.renderPosts()}
+        <Fab
+          color="primary"
+          size="large"
+          onClick={this.toggleCreateBox}
+          style={{ position: "fixed", bottom: 40, right: 40 }}
+        >
+          <AddIcon />
+        </Fab>
         <CreateEvent
           priv={this.state.privilege}
           open={this.state.createBoxOpen}
