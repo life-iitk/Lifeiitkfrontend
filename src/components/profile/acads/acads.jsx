@@ -13,7 +13,11 @@ const AcadSection = props => {
   const classes = useStyles();
   return (
     <React.Fragment>
-      <Courses courses={props.courses} className={classes.card} />
+      <Courses
+        courses={props.courses}
+        className={classes.card}
+        delete={props.deleteCourse}
+      />
       <AddCourse add={props.addCourse} className={classes.card} />
     </React.Fragment>
   );

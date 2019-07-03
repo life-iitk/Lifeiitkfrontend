@@ -84,9 +84,20 @@ export default function Profile() {
     }
   };
 
+  const deleteCourse = courseCode => {
+    // Delete course here
+  };
+
   const renderPage = page => {
     if (page === 0) return <UserInfo details={details} />;
-    else return <AcadSection courses={details.acads} addCourse={addCourse} />;
+    else
+      return (
+        <AcadSection
+          courses={details.acads}
+          addCourse={addCourse}
+          deleteCourse={deleteCourse}
+        />
+      );
   };
 
   return (
