@@ -92,7 +92,7 @@ const UserInfo = props => {
           </Paper>
         </Grid>
       </Grid>
-      <Grid direction="column">
+      <Grid direction="row">
         <Grid item>
           <Por por = {props.details.por} />  
         </Grid>

@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Chip from '@material-ui/core/Chip';
-import Checkbox from '@material-ui/core/Checkbox';
+import {Fab} from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
+import axios from "axios";
+import AddIcon from "@material-ui/icons/Add";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -47,18 +48,7 @@ const MenuProps = {
   },
 };
 
-const names = [
-  'Oliver Hansen',
-  'Van Henry',
-  'April Tucker',
-  'Ralph Hubbard',
-  'Omar Alexander',
-  'Carlos Abbott',
-  'Miriam Wagner',
-  'Bradley Wilkerson',
-  'Virginia Andrews',
-  'Kelly Snyder',
-];
+
 
 function getStyles(name, personName, theme) {
   return {
@@ -73,48 +63,96 @@ export default function Tags() {
   const classes = useStyles();
   const theme = useTheme();
   const [personName, setPersonName] = React.useState([]);
+  const [tagNames, setTagName] = React.useState([]);
+  const [subTagNames, setSubTagName] = React.useState([]);
+  const [toSubTagNames, setToSubTagName] = React.useState("");
+  const addTag = () => {
+    axios({
+      method: "put",
+      url: "http://localhost:8000/users/tags/",
+      data: { name: toSubTagNames },
+      withCredentials: true
+    }).then(()=>getSubTagName(setSubTagName));
+  };
+  const deleteTag = index => {
+    axios({
+      method: "delete",
+      url: "http://localhost:8000/users/tags/delete/",
+      data: { tag_id: index },
+      withCredentials: true
+    }).then(()=>getSubTagName(setSubTagName));
+  };
 
-  function handleChange(event) {
-    setPersonName(event.target.value);
+  const getTagName = (set) => {
+    axios.get("http://localhost:8000/tags/all/").then(response => {
+      set(response.data);});
+  };
+  
+  const getSubTagName = (set) => {
+    axios.get("http://localhost:8000/users/profile/", { withCredentials: true }).then(response => {
+      console.log(response.data.tags);
+      set(response.data.tags);});
+  };
+
+  useEffect(() => {
+    getTagName(setTagName);
+    getSubTagName(setSubTagName);
+  }, []);
+
+  function changeToSub(event) {
+    setToSubTagName(event.target.value);
   }
 
-  return (
+  return tagNames.length===0  ? (
+    "Loading..."
+  ) : (
     <div className={classes.root}>
-        <Grid 
+        {/* <Grid 
             container
             direction="row"
             alignContent="center"
             spacing={1}
             className={classes.grid}
-        >
-            <Grid item>
+        > */}
+            {/* <Grid item> */}
                 <FormControl className={classes.formControl}>
                     <InputLabel htmlFor="select-multiple-chip">Tags</InputLabel>
+                    {subTagNames.map((tag) => (
+                        <Chip
+                          key={tag.tag_id}
+                          label={tag.name}
+                          color="primary"
+                          margin="dense"
+                          onDelete={() => deleteTag(tag.tag_id)}
+                          className={classes.chip}
+                        />
+                      ))}
                     <Select
-                    multiple
-                    value={personName}
-                    onChange={handleChange}
-                    input={<Input id="select-multiple-chip" />}
-                    renderValue={selected => (
-                        <div className={classes.chips}>
-                        {selected.map(value => (
-                            <Chip key={value} label={value} className={classes.chip} />
-                        ))}
-                        </div>
-                    )}
-                    MenuProps={MenuProps}
-                    >
-                    {names.map(name => (
-                        
-                        <MenuItem key={name} value={name} style={getStyles(name, personName, theme)}>
-                        <Checkbox checked={personName.indexOf(name) > -1} />
-                        {name}
+                      value={toSubTagNames}
+                      onChange={changeToSub}
+                      inputProps={{
+                        name: 'age',
+                        id: 'age-simple',
+                      }}
+                      >
+                      {
+                        tagNames.map(tag => (
+                        <MenuItem key={tag.tag_id} value={tag.name} style={getStyles(tag.name, personName, theme)}>
+                        {tag.name}
                         </MenuItem>
                     ))}
                     </Select>
+                    <Fab
+                      color="primary"
+                      size="small"
+                      onClick={addTag}
+                      className={classes.fab}
+                    >
+                      <AddIcon />
+                    </Fab>
                 </FormControl>
-            </Grid>
-        </Grid>      
+            {/* </Grid> */}
+        {/* </Grid>       */}
     </div>
   );
 }
