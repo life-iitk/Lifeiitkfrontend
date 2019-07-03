@@ -114,7 +114,7 @@ const UserInfo = props => {
       </Grid>
       <Grid direction="column">
         <Grid item>
-          <Por pors = {props.details.por} />  
+          <Por por = {props.details.por} />  
         </Grid>
         <Grid item>
           <Tags tags = {props.details.tags}/>

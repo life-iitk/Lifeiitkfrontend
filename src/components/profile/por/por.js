@@ -34,7 +34,7 @@ export default function Por(props) {
         <Typography variant="h5" component="h2" className={classes.typo}>
           Positions Of Responsibility
         </Typography>
-        {Object.keys(props.pors).map((club, index) => (
+        {Object.keys(props.por).map((club, index) => (
           <Grid container 
           direction="row"
           alignItems="center"
@@ -46,7 +46,7 @@ export default function Por(props) {
           <BadgeIcon />
           </Grid>
           <Grid item justify="center">
-             {props.pors[club]}, {club}
+             {props.por[club]}, {club}
           </Grid>
       </Grid>   
         ))}

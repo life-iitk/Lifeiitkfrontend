@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Select,
   MenuItem,
@@ -21,10 +21,10 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const getCourses = async () => {
+const getCourses = (set) => {
   // const response = { data: require("./courses.json") };
-  const response = await axios.get("http://localhost:8000/acads/all/");
-  const courseData1 = response.data.map(e => {
+  axios.get("http://localhost:8000/acads/all/").then(response => {
+    const courseData1 = response.data.map(e => {
     const regex = /[\d]+/g;
     const i = e.code.search(regex);
     e["dept"] = e.code.substring(0, i);
@@ -39,18 +39,21 @@ const getCourses = async () => {
       courseData2[item.dept].push(item);
     }
   });
-  return courseData2;
+  set(courseData2);});
+
 };
 
 const AddCourse = props => {
   const classes = useStyles();
-  const [courseData, setCourseData] = React.useState(getCourses());
+  const [courseData, setCourseData] = React.useState({});
   const [show, setShow] = React.useState(false);
   const [dept, setDept] = React.useState("MTH");
   const [code, setCode] = React.useState("101");
-  getCourses().then(courses => setCourseData(courses));
+  
+  useEffect(() => getCourses(setCourseData), []); 
+  // console.log(!!Object.keys(courseData));
 
-  return !Object.keys(courseData) ? (
+  return Object.keys(courseData).length===0 ? (
     "Loading..."
   ) : (
     <Card style={{ margin: "10px 0" }}>
@@ -87,7 +90,7 @@ const AddCourse = props => {
           <Fab color="primary" size="small">
             <AddIcon
               onClick={() => {
-                const exists = props.add(dept + code.code);
+                const exists = props.add(dept + code);
                 setShow(exists);
               }}
             />

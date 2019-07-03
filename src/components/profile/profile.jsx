@@ -51,9 +51,15 @@ export default function Profile() {
   //   { code: "ESC101", name: "Fundamentals of Computer Science" }
   // ]);
 
+  const getCourses = () => {
+    axios
+        .get("http://localhost:8000/users/profile", { withCredentials: true })
+        .then(res => setDetails(res.data))
+        .catch(err => console.log(err));
+  }
+
   const addCourse = courseCode => {
     if (details.acads.find(course => course.code === courseCode)) {
-      console.log("Course already exists");
       return true;
     } else {
       axios({
@@ -62,17 +68,17 @@ export default function Profile() {
         data: { code: courseCode },
         withCredentials: true
       })
-        .then(res => console.log(res.data))
+        .then(() => getCourses())
         .catch(err => console.log(err));
 
       // const newDetails = { ...details };
       // newDetails.acads.push({ code: courseCode, name: "Something" });
       // setDetails(newDetails);
 
-      axios
-        .get("http://localhost:8000/users/acads", { withCredentials: true })
-        .then(res => setDetails(res.data))
-        .catch(err => console.log(err));
+      // axios
+      //   .get("http://localhost:8000/users/acads", { withCredentials: true })
+      //   .then(res => setDetails(res.data))
+      //   .catch(err => console.log(err));
 
       return false;
     }
