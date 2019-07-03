@@ -86,6 +86,14 @@ export default function Profile() {
 
   const deleteCourse = courseCode => {
     // Delete course here
+    console.log(courseCode);
+    axios({
+      method: "delete",
+      url: "http://localhost:8000/users/course/delete/",
+      data: { code: courseCode },
+      withCredentials: true
+    }).then(getCourses)
+      .catch(err => console.log(err));
   };
 
   const renderPage = page => {
