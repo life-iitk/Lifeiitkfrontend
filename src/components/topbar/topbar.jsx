@@ -33,13 +33,13 @@ const TopBar = props => {
 
   const logout = () => {
     axios
-      .get("http://localhost:8000/users/auth/logout", { withCredentials: true })
+      .get("http://localhost:8000/users/auth/logout/", { withCredentials: true })
       .then(() => window.location.reload());
   }
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/users/profile", { withCredentials: true })
+      .get("http://localhost:8000/users/profile/", { withCredentials: true })
       .then(res => setLoggedIn(true))
       .catch(err => setLoggedIn(false));
 
