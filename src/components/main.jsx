@@ -5,7 +5,7 @@ import Mess from "./mess/mess";
 import Profile from "./profile/profile";
 import Admin from "./admin/admin";
 import Calendar from "./calendar/calendar";
-import Map from "./map/map";
+import Map from "./map/map2";
 
 const useStyles = makeStyles(theme => ({
   content: {
