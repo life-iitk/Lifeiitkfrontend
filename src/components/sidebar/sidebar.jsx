@@ -1,4 +1,7 @@
 import React from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
 import {
   Typography,
   Avatar,
@@ -42,6 +45,21 @@ const useStyles = makeStyles(theme => ({
 
 const SideBar = props => {
   const classes = useStyles();
+  const [details, setDetails] = useState({});
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/users/profile", { withCredentials: true })
+      .then(res => setDetails(res.data))
+      .catch(err => {
+        console.log(err);
+        setDetails({name: "Not Logged In", roll: "", image: "profile-pic.png"});
+      });
+      console.log("\n\n\n\n");
+      console.log(document.cookie.split(';'));
+  }, []);
+
+
 
   const drawer = isMobile => (
     <div>
@@ -58,11 +76,12 @@ const SideBar = props => {
           if (isMobile) props.handleToggle();
         }}
       >
-        <CardHeader
-          avatar={<Avatar src="profile-pic.png" />}
-          title="John Doe"
-          subheader="180777"
-        />
+          <CardHeader
+            avatar={<Avatar src={details.image} />}
+            title={details.name}
+            subheader={details.roll}
+          />
+        {/* ) } */}
       </div>
       <Divider />
       <List>

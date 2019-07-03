@@ -1,9 +1,8 @@
 import React from "react";
-import { Grid, Button, Avatar, Typography, Paper } from "@material-ui/core";
+import { Grid, Avatar, Typography, Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Por from "./por/por";
 import Tags from "./tags/tags.js";
-import profileIcon from "./profileIcon.png";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -39,29 +38,10 @@ const UserInfo = props => {
           <Grid>
             <Grid item>
               <Avatar
-                src={profileIcon}
+                src={props.details.image}   //Need to look into
                 alt="Hi there"
                 className={classes.bigAvatar}
               />
-            </Grid>
-            <Grid item>
-              <input
-                accept="image/*"
-                className={classes.input}
-                id="contained-button-file"
-                multiple
-                type="file"
-              />
-              <label htmlFor="contained-button-file">
-                <Button
-                  variant="contained"
-                  color="primary"
-                  component="span"
-                  className={classes.updateButton}
-                >
-                  Change
-                </Button>
-              </label>
             </Grid>
           </Grid>
         </Grid>

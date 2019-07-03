@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -6,6 +6,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
+import axios from "axios";
 
 const drawerWidth = 240;
 const useStyles = makeStyles(theme => ({
@@ -28,6 +29,16 @@ const useStyles = makeStyles(theme => ({
 
 const TopBar = props => {
   const classes = useStyles();
+  const [loggedIn, setLoggedIn] = React.useState(false);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/users/profile", { withCredentials: true })
+      .then(res => setLoggedIn(true))
+      .catch(err => setLoggedIn(false));
+
+  }, []);
+
   return (
     <AppBar position="fixed" className={classes.appBar}>
       <Toolbar>
@@ -43,9 +54,16 @@ const TopBar = props => {
         <Typography variant="h6" className={classes.title} noWrap>
           {props.currentPage.name}
         </Typography>
+        { loggedIn ? (
+        <Button color="inherit">
+        Logout
+      </Button>
+        ) : ( 
         <Button color="inherit" onClick={props.openLogin}>
-          Login
-        </Button>
+        Login
+      </Button>
+        )}
+
       </Toolbar>
     </AppBar>
   );

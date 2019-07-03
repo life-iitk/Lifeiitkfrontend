@@ -29,7 +29,6 @@ const FeedPost = props => {
   const [open, setOpen] = React.useState(false);
   const post = props.post;
   let dtFormatted = post.date.toString();
-  dtFormatted = dtFormatted.slice(0, dtFormatted.indexOf(":") - 7);
 
   const toggleModal = () => setOpen(!open);
 
