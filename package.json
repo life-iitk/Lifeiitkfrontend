@@ -9,6 +9,7 @@
     "bootstrap": "^4.3.1",
     "font-awesome": "^4.7.0",
     "leaflet": "^1.5.1",
+    "leaflet-search": "^2.9.8",
     "moment": "^2.24.0",
     "react": "^16.8.6",
     "react-big-calendar": "^0.22.0",

@@ -186,9 +186,9 @@ class Map extends Component {
                 ? this.state.centerCampus
                 : this.state.centerAcadsArea
             }
-            minZoom={this.state.selectedView === 0 ? -2 : -1}
+            minZoom={this.state.selectedView === 0 ? -3 : -1}
             maxZoom={1}
-            zoom={this.state.selectedView === 0 ? 0 : 1}
+            zoom={this.state.selectedView === 0 ? -1 : 1}
             attributionControl={true}
             zoomControl={false}
             doubleClickZoom={true}
