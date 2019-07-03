@@ -31,6 +31,12 @@ const TopBar = props => {
   const classes = useStyles();
   const [loggedIn, setLoggedIn] = React.useState(false);
 
+  const logout = () => {
+    axios
+      .get("http://localhost:8000/users/auth/logout", { withCredentials: true })
+      .then(() => window.location.reload());
+  }
+
   useEffect(() => {
     axios
       .get("http://localhost:8000/users/profile", { withCredentials: true })
@@ -55,7 +61,7 @@ const TopBar = props => {
           {props.currentPage.name}
         </Typography>
         { loggedIn ? (
-        <Button color="inherit">
+        <Button color="inherit" onClick={logout}>
         Logout
       </Button>
         ) : ( 
