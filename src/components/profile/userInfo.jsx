@@ -1,8 +1,10 @@
 import React from "react";
-import { Grid, Avatar, Typography, Paper } from "@material-ui/core";
+import { Grid, Avatar, Typography, Paper, InputAdornment, IconButton, TextField , Fab ,Icon } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import ChatIcon from "@material-ui/icons/Chat";
 import Por from "./por/por";
 import Tags from "./tags/tags.js";
+import axios from "axios";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -26,11 +28,27 @@ const useStyles = makeStyles(theme => ({
   },
   input: {
     display: "none"
+  },
+  fab: {
+    margin: theme.spacing(0),
+    marginLeft: theme.spacing(1),
+    boxShadow: "none"
   }
 }));
 
 const UserInfo = props => {
   const classes = useStyles();
+  const [link, setLink] = React.useState(props.details.fblink);
+
+  const updateLink = () => {
+    axios({
+      method: "put",
+      url: "http://localhost:8000/users/",
+      data: {fblink: link},
+      withCredentials: true
+    });
+  }
+
   return (
     <React.Fragment>
       <Grid container direction="row" spacing={1}>
@@ -100,6 +118,26 @@ const UserInfo = props => {
           <Tags tags = {props.details.tags}/>
         </Grid>
       </Grid>
+      <TextField
+        variant="filled"
+        label="Facebook Link"
+        defaultValue={props.details.fblink}
+        onChange={(e) => setLink(e.target.value)}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <IconButton
+                edge="end"
+              >
+                {/* <ChatIcon></ChatIcon> */}<i className="fa fa-facebook-official"></i>
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
+      />
+      <Fab color="secondary" className={classes.fab} onClick={updateLink}>
+        <Icon>edit_icon</Icon>
+      </Fab>
     </React.Fragment>
   );
 };
