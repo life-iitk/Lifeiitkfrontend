@@ -32,10 +32,10 @@ const Main = props => {
       case "Map":
         return <Map />;
       // Temporary - to be replaced with fetched privileges
-      case "Admin":
-        return <Admin />;
+      // case "Admin":
+      //   return <Admin />;
       default:
-        return <Feed />;
+        return <Admin name = {pgName} />;
     }
   };
 

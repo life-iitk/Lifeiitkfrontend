@@ -7,6 +7,7 @@ import TopBar from "./components/topbar/topbar";
 import Main from "./components/main";
 import LoginBox from "./components/login/loginBox";
 import { CssBaseline } from "@material-ui/core";
+import axios from "axios";
 
 class App extends Component {
   // 'icon' property in pages is the Material Icons icon name.
@@ -18,14 +19,30 @@ class App extends Component {
         { name: "Calendar", icon: "calendar_today" },
         { name: "Map", icon: "map" },
         { name: "Mess", icon: "restaurant" },
-        { name: "Search", icon: "search" },
+        //{ name: "Search", icon: "search" },
         { name: "Profile", icon: "account_circle" },
-        { name: "Admin", icon: "settings" } // Temporary
+        //{ name: "Admin", icon: "settings" } // Temporary
       ],
       activePage: 0,
       sidebarActive: false,
       loginBoxOpen: false
     };
+  }
+
+  getOwnedtags() {
+    axios
+      .get("http://localhost:8000/users/owned/", { withCredentials: true })
+      .then(res => {
+        let newPages = res.data.owned.map(pg => ({name: pg.name, icon: "settings"}));
+        let prevList = this.state.pages.concat(newPages);
+        this.setState({pages: prevList});
+
+      })
+      .catch(err => console.log(err));
+  }
+
+  componentDidMount(){
+    this.getOwnedtags();
   }
 
   sidebarToggleHandler = () => {
