@@ -3,6 +3,7 @@ import CreateEvent from "./createEvent";
 import EventCard from "./eventCard";
 import { Fab } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
+import axios from "axios";
 
 // Sample post for frontend testing
 const samplePost = {
@@ -31,8 +32,13 @@ class Admin extends Component {
     };
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.name !== prevProps.name)this.getItems();
+  }
+
   componentDidMount() {
     // Fetch events here
+    this.getItems();
     this.setState({
       privilege: {
         user: "user",
@@ -42,12 +48,21 @@ class Admin extends Component {
     });
   }
 
+  getItems() {
+    console.log(this.props.name);
+    axios
+      .get("http://localhost:8000/events/view/tagged_events/?tag_name="+ this.props.name, { withCredentials: true })    
+      .then(res => this.setState({ events: res.data }))
+      .catch(err => console.log(err));
+  }
+
   toggleCreateBox = () => {
     this.setState({ createBoxOpen: !this.state.createBoxOpen });
   };
 
   createEvent = data => {
     this.setState({ createBoxOpen: false });
+    console.log(this.state.privilege);
     data.tags = this.state.privilege.tag;
     data.tag_id = this.state.privilege.tag[0].tag_id;
     data.date = new Date(data.date);
@@ -57,7 +72,13 @@ class Admin extends Component {
   };
 
   deleteEvent = id => {
-    //Send event deletion request here
+    axios({
+      method: "delete",
+      url: "http://localhost:8000/events/delete/",
+      data: { "event_id": id},
+      withCredentials: true
+    }).then()
+      .catch(err => console.log(err));
     const newEvents = [...this.state.events];
     const index = newEvents.findIndex(ev => ev.event_id === id);
     newEvents.splice(index, 1);
