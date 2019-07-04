@@ -1,4 +1,5 @@
 import React from "react";
+import axios from 'axios'
 import {
   Modal,
   CardContent,
@@ -61,6 +62,12 @@ const CreateEvent = props => {
   const createEvent = (e, data) => {
     e.preventDefault();
     props.create(formData);
+    axios({
+      method: 'post',
+      url: 'http://localhost:8000/events/create/',
+      data: formData,
+      withCredentials : true
+    });
   };
 
   const handleChange = name => (e, data) => {

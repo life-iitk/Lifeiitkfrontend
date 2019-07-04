@@ -49,6 +49,7 @@ class Admin extends Component {
   createEvent = data => {
     this.setState({ createBoxOpen: false });
     data.tags = this.state.privilege.tag;
+    data.tag_id = this.state.privilege.tag[0].tag_id;
     data.date = new Date(data.date);
     const newEvents = [...this.state.events];
     newEvents.push(data);
