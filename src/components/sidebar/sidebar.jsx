@@ -44,23 +44,15 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const SideBar = props => {
+  //console.log(props.data);
   const classes = useStyles();
-  const [details, setDetails] = useState({});
+  const [details,setDetails] = useState(props.data);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:8000/users/profile", { withCredentials: true })
-      .then(res => setDetails(res.data))
-      .catch(err => {
-        console.log(err);
-        setDetails({name: "Not Logged In", roll: "", image: "profile-pic.png"});
-      });
-      console.log("\n\n\n\n");
-      console.log(document.cookie.split(';'));
-  }, []);
-
-
-
+    setDetails({name:props.data.name, roll:props.data.roll, image:props.data.image});
+    if (Object.keys(props.data).length === 0)
+      setDetails({name: "Not Logged In!", roll:""});
+  },[props.data])
   const drawer = isMobile => (
     <div>
       <div className={classes.toolbar}>

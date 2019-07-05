@@ -47,7 +47,7 @@ const PostModal = props => {
         <CardHeader
           avatar={<Avatar src="avatar.png" />}
           title={post.title}
-          subheader={post.TAGNAME}
+          subheader={props.name}
         />
         <CardContent style={{ paddingTop: 0 }}>
           <Typography variant="overline">
