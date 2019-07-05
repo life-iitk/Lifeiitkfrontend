@@ -53,15 +53,11 @@ const UserInfo = props => {
     <React.Fragment>
       <Grid container direction="row" spacing={1}>
         <Grid item>
-          <Grid>
-            <Grid item>
               <Avatar
                 src={props.details.image}   //Need to look into
                 alt="Hi there"
                 className={classes.bigAvatar}
               />
-            </Grid>
-          </Grid>
         </Grid>
         <Grid item>
           <Paper className={classes.paper}>
@@ -111,12 +107,10 @@ const UserInfo = props => {
         </Grid>
       </Grid>
       <Grid direction="row">
-        <Grid item>
-          <Por por = {props.details.por} />  
-        </Grid>
-        <Grid item>
+          <Por por = {props.details.por} /> 
+      </Grid> 
+      <Grid>
           <Tags tags = {props.details.tags}/>
-        </Grid>
       </Grid>
       <TextField
         variant="filled"
