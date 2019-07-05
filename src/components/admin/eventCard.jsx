@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Card,
   CardContent,
@@ -10,7 +10,7 @@ import {
   Chip
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import PostModal from "../feed/postModal";
+import PostModal from "./adminPostModal";
 import DeleteDialog from "./delete";
 
 const useStyles = makeStyles(theme => ({
@@ -26,22 +26,36 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const EventCard = props => {
+  console.log(props)
   const classes = useStyles();
   const [postOpen, setPostOpen] = React.useState(false);
   const [delOpen, setDelOpen] = React.useState(false);
+  const [tagName, setTagName] = React.useState("");
   const post = props.post;
   let dtFormatted = post.date.toString();
   dtFormatted = dtFormatted.slice(0, dtFormatted.indexOf(":") - 7);
 
   const togglePost = () => setPostOpen(!postOpen);
   const toggleDelBox = () => setDelOpen(!delOpen);
+  useEffect(() => getTagName(setTagName), []); 
+  const getTagName = (set) => {
+    if(!!!post.tag_name) {
+      console.log(post.tags);
+      post["TAGNAME"]=post.tags[0].name;
+    set(post.tags[0].name);
+    }
+    else {
+      post["TAGNAME"]=post.tag_name;
+      set(post.tag_name);
+    }
+  };
 
   return (
     <Card style={{ margin: "10px 10px" }}>
       <CardHeader
         avatar={<Avatar src="avatar.png" />}
         title={post.title}
-        subheader={post.tags[0].name}
+        subheader={tagName}
       />
 
       <CardContent style={{ padding: "0 16px" }}>

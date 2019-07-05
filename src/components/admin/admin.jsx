@@ -6,21 +6,21 @@ import AddIcon from "@material-ui/icons/Add";
 import axios from "axios";
 
 // Sample post for frontend testing
-const samplePost = {
-  event_id: 1,
-  title: "Lecture on Bash and Git",
-  summary:
-    "This lecture will cover the fundamentals of bash scripting, and will also teach you about the Git version control system.",
-  date: new Date(2019, 7, 16),
-  tags: [{ name: "Programming Club", tag_id: 1, description: "SnT Club" }],
-  start_time: "18:30:00",
-  end_time: "22:00:00",
-  venue: "RM101",
-  day_long: false,
-  description:
-    "The topics covered would briefly include introduction to terminal, package managers and the use of Git. It's useful to be familiar with the terminal and the Linux environment for any coding task. Version control tools like Git helps in better flow control and collaboration of code, it is an essential skill.",
-  hash_tags: ["PClub", "Git", "Bash"]
-};
+// const samplePost = {
+//   event_id: 1,
+//   title: "Lecture on Bash and Git",
+//   summary:
+//     "This lecture will cover the fundamentals of bash scripting, and will also teach you about the Git version control system.",
+//   date: new Date(2019, 7, 16),
+//   tags: [{ name: "Programming Club", tag_id: 1, description: "SnT Club" }],
+//   start_time: "18:30:00",
+//   end_time: "22:00:00",
+//   venue: "RM101",
+//   day_long: false,
+//   description:
+//     "The topics covered would briefly include introduction to terminal, package managers and the use of Git. It's useful to be familiar with the terminal and the Linux environment for any coding task. Version control tools like Git helps in better flow control and collaboration of code, it is an essential skill.",
+//   hash_tags: ["PClub", "Git", "Bash"]
+// };
 
 class Admin extends Component {
   constructor(props) {
@@ -33,23 +33,18 @@ class Admin extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.name !== prevProps.name)this.getItems();
+    if (this.props.name !== prevProps.name){
+      this.getItems();
+    }
   }
 
   componentDidMount() {
     // Fetch events here
     this.getItems();
-    this.setState({
-      privilege: {
-        user: "user",
-        tag: [{ tag_id: 1, name: "Programming Club", description: "Club" }]
-      },
-      events: new Array(3).fill(samplePost)
-    });
+    this.setState({});
   }
 
   getItems() {
-    console.log(this.props.name);
     axios
       .get("http://localhost:8000/events/view/tagged_events/?tag_name="+ this.props.name, { withCredentials: true })    
       .then(res => this.setState({ events: res.data }))
@@ -62,9 +57,7 @@ class Admin extends Component {
 
   createEvent = data => {
     this.setState({ createBoxOpen: false });
-    console.log(this.state.privilege);
-    data.tags = this.state.privilege.tag;
-    data.tag_id = this.state.privilege.tag[0].tag_id;
+    data.tag_name = this.props.name;
     data.date = new Date(data.date);
     const newEvents = [...this.state.events];
     newEvents.push(data);
@@ -86,6 +79,7 @@ class Admin extends Component {
   };
 
   renderPosts = () => {
+    console.log(this.state.events);
     return this.state.events.map((event, index) => (
       <EventCard post={event} delete={this.deleteEvent} key={index} />
     ));
