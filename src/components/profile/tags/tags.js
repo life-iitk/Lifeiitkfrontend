@@ -116,18 +116,10 @@ export default function Tags() {
         > */}
             {/* <Grid item> */}
                 <FormControl className={classes.formControl}>
-                    <InputLabel htmlFor="select-multiple-chip">Tags</InputLabel>
-                    {subTagNames.map((tag) => (
-                        <Chip
-                          key={tag.tag_id}
-                          label={tag.name}
-                          color="primary"
-                          margin="dense"
-                          onDelete={() => deleteTag(tag.tag_id)}
-                          className={classes.chip}
-                        />
-                      ))}
-                    <Select
+                  <div>
+                  <InputLabel htmlFor="select-multiple-chip">Tags</InputLabel>
+                <Select
+                      style = {{marginRight:0.5+'em'}}
                       value={toSubTagNames}
                       onChange={changeToSub}
                       inputProps={{
@@ -142,6 +134,7 @@ export default function Tags() {
                         </MenuItem>
                     ))}
                     </Select>
+
                     <Fab
                       color="primary"
                       size="small"
@@ -150,6 +143,18 @@ export default function Tags() {
                     >
                       <AddIcon />
                     </Fab>
+                    </div>
+                    {subTagNames.map((tag) => (
+                        <Chip
+                          key={tag.tag_id}
+                          label={tag.name}
+                          color="primary"
+                          margin="dense"
+                          onDelete={() => deleteTag(tag.tag_id)}
+                          className={classes.chip}
+                        />
+                      ))}
+
                 </FormControl>
             {/* </Grid> */}
         {/* </Grid>       */}
