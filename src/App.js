@@ -25,8 +25,21 @@ class App extends Component {
       ],
       activePage: 0,
       sidebarActive: false,
-      loginBoxOpen: false
+      loginBoxOpen: false,
+      details :{}
+      
     };
+  }
+  IsLoggedIn () {
+    axios
+      .get("http://localhost:8000/users/profile", { withCredentials: true })
+      .then(res => {
+        this.setState({details: res.data});
+        console.log(this.state.details);
+      })
+      .catch(err => this.setState({loginBoxOpen:true}));
+    
+    console.log(this.state.details)
   }
 
   getOwnedtags() {
@@ -42,7 +55,10 @@ class App extends Component {
   }
 
   componentDidMount(){
+    this.IsLoggedIn();
     this.getOwnedtags();
+    if(this.state.details.length === 0)
+      this.setState({loginBoxOpen: true})
   }
 
   sidebarToggleHandler = () => {
@@ -59,7 +75,7 @@ class App extends Component {
   };
 
   render() {
-    console.log(this.state.activePage);
+    console.log("Rendered");
     return (
       <div
         style={{
@@ -72,6 +88,7 @@ class App extends Component {
           toggleSidebar={this.sidebarToggleHandler}
           currentPage={this.state.pages[this.state.activePage]}
           openLogin={this.loginBoxToggleHandler}
+          data={this.state.details}
         />
         <SideBar
           pages={this.state.pages}
@@ -80,8 +97,10 @@ class App extends Component {
           handleToggle={this.sidebarToggleHandler}
           open={this.state.sidebarActive}
           openLogin={this.loginBoxToggleHandler}
+          data={this.state.details}
         />
         {/* Container for the main body */}
+
         <Main page={this.state.pages[this.state.activePage]} />
         <LoginBox
           open={this.state.loginBoxOpen}

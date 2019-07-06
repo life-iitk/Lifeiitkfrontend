@@ -36,23 +36,12 @@ const LoginBox = props => {
   const classes = useStyles();
   const [state,setstate] = useState('default');
   const [state1,setstate1] = useState('');
+  const [error, setError] = useState(false)
   const handleClick = (e)=>{
     e.preventDefault();
     var form_data = new FormData();
     form_data.set('username',state);
     form_data.set('password',state1);
-    // fetch('http://localhost:8000/users/auth/login/', {
-    //     method: 'POST',
-    //     body: JSON.stringify({
-    //             'username' : state,
-    //             'password' : state1,
-    //           }),
-    //     headers: {
-    //         'Content-Type': 'application/json'
-    //     }
-    // }).then(res => {
-    //     return res;
-    // }).catch(err => err);
     var qs = require('qs');
     axios({
         method: 'post',
@@ -62,7 +51,10 @@ const LoginBox = props => {
           'password' : state1
         }),
         withCredentials: true
-    });
+    })
+    .then(res => window.location.reload())
+    .catch(err => setError(true));
+
   };
   const func1 = (event)=>{
   event.preventDefault();
@@ -87,6 +79,7 @@ const LoginBox = props => {
         <Typography variant="h4" color="primary">
           Life@IITK
         </Typography>
+        <form>
         <FormControl className={classes.formgroup}>
           <InputLabel>Username</InputLabel>
           <Input required={true} onChange = {func1}>Username</Input>
@@ -109,9 +102,12 @@ const LoginBox = props => {
           />
         </FormControl>
         <br />
-        <Button onClick={handleClick} variant="contained" color="primary" style={{ margin: 10 }}>
+        {error &&
+        <p style={{color:'red'}}>Wrong Username or Password</p>}
+        <Button onClick={handleClick} variant="contained" color="primary" style={{ margin: 10 }} type="submit">
           Login
         </Button>
+        </form>
       </div>
     </Modal>
   );

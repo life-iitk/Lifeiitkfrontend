@@ -55,7 +55,7 @@ const EventCard = props => {
       <CardHeader
         avatar={<Avatar src="avatar.png" />}
         title={post.title}
-        subheader={tagName}
+        subheader={props.name}
       />
 
       <CardContent style={{ padding: "0 16px" }}>

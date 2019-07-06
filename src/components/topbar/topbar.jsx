@@ -28,6 +28,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const TopBar = props => {
+  console.log(props.data);
   const classes = useStyles();
   const [loggedIn, setLoggedIn] = React.useState(false);
 
@@ -38,12 +39,12 @@ const TopBar = props => {
   }
 
   useEffect(() => {
-    axios
-      .get("http://localhost:8000/users/profile/", { withCredentials: true })
-      .then(res => setLoggedIn(true))
-      .catch(err => setLoggedIn(false));
-
-  }, []);
+    console.log(props.data)
+    console.log(Object.keys(props.data).length)
+    if (Object.keys(props.data).length !== 0)
+      setLoggedIn(true)
+      console.log(loggedIn);
+  },[props.data])
 
   return (
     <AppBar position="fixed" className={classes.appBar}>

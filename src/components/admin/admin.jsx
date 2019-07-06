@@ -81,7 +81,7 @@ class Admin extends Component {
   renderPosts = () => {
     console.log(this.state.events);
     return this.state.events.map((event, index) => (
-      <EventCard post={event} delete={this.deleteEvent} key={index} />
+      <EventCard post={event} delete={this.deleteEvent} key={index} name={this.props.name} />
     ));
   };
 
