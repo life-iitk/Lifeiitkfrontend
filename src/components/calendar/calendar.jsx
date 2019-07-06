@@ -22,13 +22,13 @@ const ColoredDateCellWrapper = ({ children }) =>
   });
 
 const toCalendarPost = event => {
-  const dtString = event.date.toISOString().slice(0, 10);
+  const startDt = new moment(event.date+event.start_time, 'YYYY-MM-DDHH:mm:ss');
+  const endDt = new moment(event.date+event.end_time,'YYYY-MM-DDHH:mm:ss');
   const clPost = {
     event_id: event.event_id,
     title: event.title,
-    // Use opposite time offset to balance toISOString() conversion to UTC
-    start: new Date(`${dtString}T${event.start_time}-05:30`),
-    end: new Date(`${dtString}T${event.end_time}-05:30`),
+    start: startDt.toDate(),
+    end: endDt.toDate(),
     allDay: event.day_long
   };
   return clPost;
@@ -40,19 +40,15 @@ const fetchedPost = i => {
     title: "Lecture on Bash and Git",
     summary:
       "This lecture will cover the fundamentals of bash scripting, and will also teach you about the Git version control system.",
-    date: new Date(2019, 7, 16),
-    by: "Programming Club",
+    date: '2019-08-15',
+    tags: [{ name: "Programming Club", tag_id: 1, description: "SnT Club" }],
     start_time: "18:30:00",
     end_time: "22:00:00",
     venue: "RM101",
     day_long: false,
     description:
       "The topics covered would briefly include introduction to terminal, package managers and the use of Git. It's useful to be familiar with the terminal and the Linux environment for any coding task. Version control tools like Git helps in better flow control and collaboration of code, it is an essential skill.",
-    tags: [
-      { name: "PClub", tag_id: 1, description: "SnT Club" },
-      { name: "Git", tag_id: 2, description: "Version control system" },
-      { name: "Bash", tag_id: 3, description: "Default shell for linux" }
-    ]
+    hash_tags: ["PClub", "Git", "Bash"]
   };
 };
 
@@ -65,29 +61,17 @@ class Calendar extends Component {
       date: new Date(),
       filterBoxOpen: false,
       eventBoxOpen: false,
-      tags: []
+      tags: [],
+      selectedTags : [],
     };
   }
 
   componentDidMount() {
     /* FETCH MONTH'S EVENTS */
-    // const dt = this.state.date;
-    // let events = this.getItems(dt.getMonth() + 1, dt.getFullYear());
+    const dt = this.state.date;
+    this.getItems(dt.getMonth() + 1, dt.getFullYear());
     /* OR USE HARDCODED EVENTS */
-    let events = new Array(4).fill(1).map((val, index) => fetchedPost(index));
-    const tags = {};
-    events = events.map(event => {
-      event.tags.forEach(tag => {
-        tag.isSelected = true;
-        if (!tags[tag.tag_id]) tags[tag.tag_id] = tag;
-      });
-      return event;
-    });
-    this.setState({
-      allEvents: events,
-      filteredEvents: events,
-      tags: Object.values(tags)
-    });
+    // let events = new Array(4).fill(1).map((val, index) => fetchedPost(index));
   }
 
   toggleFilterBox = () => {
@@ -106,13 +90,25 @@ class Calendar extends Component {
         withCredentials: true
       })
       .then(res => {
-        const events = res.data;
+        let events = res.data;
         events.forEach(event => {
           event.id = event.event_id;
           event.start = event.date;
           event.end = event.date;
         });
-        return events;
+        const tags = {};
+        events = events.map(event => {
+          event.tags.forEach(tag => {
+            tag.isSelected = true;
+            if (!tags[tag.tag_id]) tags[tag.tag_id] = tag;
+          });
+          return event;
+        });
+        this.setState({
+          allEvents: events,
+          filteredEvents: events,
+          tags: Object.values(tags),
+        });
       })
       .catch(err => console.log(err));
   }
@@ -128,11 +124,22 @@ class Calendar extends Component {
     this.setState({ date: newDt });
   };
 
-  filterTags = (event, tag) => {
-    const id = tag.key;
+  filterTags = (tag) => {
+    const name = tag;
     const newTags = [...this.state.tags];
-    const index = newTags.findIndex(t => t.tag_id === parseInt(id));
-    newTags[index].isSelected = !newTags[index].isSelected;
+    const index = newTags.findIndex(t => t.name === name);
+    newTags[index].isSelected = true;
+    this.setState({
+      tags: newTags,
+      filteredEvents: this.filterEvents(newTags)
+    });
+  };
+
+  handleDelete = (tag) =>
+  {
+    const newTags = [...this.state.tags];
+    const index = newTags.findIndex(t => t.name === tag.name);
+    newTags[index].isSelected = false;
     this.setState({
       tags: newTags,
       filteredEvents: this.filterEvents(newTags)
@@ -156,6 +163,8 @@ class Calendar extends Component {
     );
     this.setState({ currPost: selEvent, eventBoxOpen: true });
   };
+
+  
 
   render() {
     return (
@@ -186,6 +195,7 @@ class Calendar extends Component {
         <FilterBox
           tags={this.state.tags}
           filter={this.filterTags}
+          Unselect={this.handleDelete}
           open={this.state.filterBoxOpen}
           onClose={this.toggleFilterBox}
         />

@@ -11,6 +11,9 @@ import {
   Checkbox,
   CardContent
 } from "@material-ui/core";
+import {Fab} from '@material-ui/core';
+import AddIcon from "@material-ui/icons/Add";
+import Chip from '@material-ui/core/Chip';
 // import Calendar from "./calendar";
 
 const useStyles = makeStyles(theme => ({
@@ -47,7 +50,8 @@ const MenuProps = {
 
 const FilterModal = props => {
   const classes = useStyles();
-  const tagNames = props.tags.map(tag => tag.name);
+  //const tagNames = props.tags.map(tag => tag.name);
+  const [selectedTag, setSelectedTag] = React.useState(props.tags[0]);
   //   const [selectAll, toggleSelectAll] = React.useState(true);
   //   const [showOnlySubscribed, toggleSubscribed] = React.useState(false);
 
@@ -97,27 +101,43 @@ const FilterModal = props => {
   //      );
   //   };
 
+  
+
   return (
     <Modal open={props.open} onClose={props.onClose} className={classes.modal}>
       <div className={classes.paper}>
         <CardContent>
           <FormControl className={classes.formControl}>
-            <InputLabel htmlFor="select-multiple-checkbox">Tags</InputLabel>
+            <InputLabel htmlFor="select-multiple-chip">Tags</InputLabel>
             <Select
-              multiple
-              value={tagNames}
-              onChange={props.filter}
-              input={<Input id="select-multiple-checkbox" />}
-              renderValue={selected => selected.join(" • ")}
+              value={selectedTag}
+              onChange={e => setSelectedTag(e.target.value)}
               MenuProps={MenuProps}
             >
               {props.tags.map(tag => (
                 <MenuItem key={tag.tag_id} value={tag.name}>
-                  <Checkbox checked={tag.isSelected} />
                   <ListItemText primary={tag.name} />
                 </MenuItem>
               ))}
             </Select>
+            <Fab
+              color="primary"
+              size="small"
+              onClick={() => props.filter(selectedTag)}
+              className={classes.fab}
+            >
+              <AddIcon />
+            </Fab>
+            {props.tags.filter(t => t.isSelected).map((tag) => (
+              <Chip
+                key={tag.tag_id}
+                label={tag.name}
+                color="primary"
+                margin="dense"
+                onDelete={() => props.Unselect(tag)}
+                className={classes.chip}
+              />
+            ))}
           </FormControl>
         </CardContent>
         {/* <Button
