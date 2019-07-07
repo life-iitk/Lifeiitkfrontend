@@ -83,7 +83,7 @@ class Calendar extends Component {
   };
 
   getItems(month, year) {
-    let url = "http://localhost:8000/events/view/month";
+    let url = "http://localhost:8000/events/all";
     if (month && year) url += `/?month=${month}&year=${year}`;
     axios
       .get(url, {
