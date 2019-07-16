@@ -7,6 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import axios from "axios";
+import {API_ROOT} from "../../api-config";
 
 const drawerWidth = 240;
 const useStyles = makeStyles(theme => ({
@@ -34,7 +35,7 @@ const TopBar = props => {
 
   const logout = () => {
     axios
-      .get("http://localhost:8000/users/auth/logout/", { withCredentials: true })
+      .get(`${API_ROOT}/users/auth/logout/`, { withCredentials: true })
       .then(() => window.location.reload());
   }
 

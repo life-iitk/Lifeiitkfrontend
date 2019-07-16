@@ -1,5 +1,5 @@
 import React from "react";
-import axios from 'axios'
+import axios from 'axios';
 import {
   Modal,
   CardContent,
@@ -13,6 +13,7 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import AddIcon from "@material-ui/icons/Add";
+import { API_ROOT } from "../../api-config"
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -64,7 +65,7 @@ const CreateEvent = props => {
     props.create(formData);
     axios({
       method: 'post',
-      url: 'http://localhost:8000/events/create/',
+      url: `${API_ROOT}/events/create/`,
       data: formData,
       withCredentials : true
     });

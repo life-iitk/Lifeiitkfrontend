@@ -8,6 +8,7 @@ import Main from "./components/main";
 import LoginBox from "./components/login/loginBox";
 import { CssBaseline } from "@material-ui/core";
 import axios from "axios";
+import { API_ROOT } from "./api-config";
 
 class App extends Component {
   // 'icon' property in pages is the Material Icons icon name.
@@ -32,7 +33,7 @@ class App extends Component {
   }
   IsLoggedIn () {
     axios
-      .get("http://localhost:8000/users/profile", { withCredentials: true })
+      .get(`${API_ROOT}/users/profile`, { withCredentials: true })
       .then(res => {
         this.setState({details: res.data});
         console.log(this.state.details);
@@ -44,7 +45,7 @@ class App extends Component {
 
   getOwnedtags() {
     axios
-      .get("http://localhost:8000/users/owned/", { withCredentials: true })
+      .get(`${API_ROOT}/users/owned/`, { withCredentials: true })
       .then(res => {
         let newPages = res.data.owned.map(pg => ({name: pg.name, icon: "settings"}));
         let prevList = this.state.pages.concat(newPages);

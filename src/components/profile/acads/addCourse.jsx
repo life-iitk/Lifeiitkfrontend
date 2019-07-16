@@ -11,6 +11,7 @@ import {
 import AddIcon from "@material-ui/icons/Add";
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
+import { API_ROOT } from "../../../api-config"
 
 const useStyles = makeStyles(theme => ({
   input: {
@@ -23,7 +24,7 @@ const useStyles = makeStyles(theme => ({
 
 const getCourses = (set) => {
   // const response = { data: require("./courses.json") };
-  axios.get("http://localhost:8000/acads/all/").then(response => {
+  axios.get(`${API_ROOT}/acads/all/`).then(response => {
     const courseData1 = response.data.map(e => {
     const regex = /[\d]+/g;
     const i = e.code.search(regex);

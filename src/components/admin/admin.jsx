@@ -4,6 +4,7 @@ import EventCard from "./eventCard";
 import { Fab } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import axios from "axios";
+import { API_ROOT } from "../../api-config"
 
 // Sample post for frontend testing
 // const samplePost = {
@@ -46,7 +47,7 @@ class Admin extends Component {
 
   getItems() {
     axios
-      .get("http://localhost:8000/events/view/tagged_events/?tag_name="+ this.props.name, { withCredentials: true })    
+      .get(`${API_ROOT}/events/view/tagged_events/?tag_name=`+ this.props.name, { withCredentials: true })    
       .then(res => this.setState({ events: res.data }))
       .catch(err => console.log(err));
   }
@@ -67,7 +68,7 @@ class Admin extends Component {
   deleteEvent = id => {
     axios({
       method: "delete",
-      url: "http://localhost:8000/events/delete/",
+      url: `${API_ROOT}/events/delete/`,
       data: { "event_id": id},
       withCredentials: true
     }).then()
