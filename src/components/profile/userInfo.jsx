@@ -43,7 +43,7 @@ const UserInfo = props => {
   const updateLink = () => {
     axios({
       method: "put",
-      url: "http://localhost:8000/users/",
+      url: `${API_ROOT}/users/`,
       data: {fblink: link},
       withCredentials: true
     });

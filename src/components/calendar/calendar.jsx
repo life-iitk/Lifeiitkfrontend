@@ -10,6 +10,7 @@ import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import FeedPost from "../feed/feedPost.jsx";
 import axios from "axios";
+import { API_ROOT } from "../../api-config";
 
 const localizer = momentLocalizer(moment);
 let allViews = Object.keys(Views).map(k => Views[k]);
@@ -83,7 +84,7 @@ class Calendar extends Component {
   };
 
   getItems(month, year) {
-    let url = "http://localhost:8000/events/all";
+    let url = `${API_ROOT}/events/all`;
     if (month && year) url += `/?month=${month}&year=${year}`;
     axios
       .get(url, {

@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import AcadSection from "./acads/acads";
 import UserInfo from "./userInfo";
 import axios from "axios";
+import { API_ROOT } from "../../api-config"
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 
@@ -40,7 +41,7 @@ export default function Profile() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/users/profile", { withCredentials: true })
+      .get(`${API_ROOT}/users/profile`, { withCredentials: true })
       .then(res => setDetails(res.data))
       .catch(err => console.log(err));
   }, []); //Pass acads array to acads portion and rest to profile section
@@ -53,7 +54,7 @@ export default function Profile() {
 
   const getCourses = () => {
     axios
-        .get("http://localhost:8000/users/profile", { withCredentials: true })
+        .get(`${API_ROOT}/users/profile`, { withCredentials: true })
         .then(res => setDetails(res.data))
         .catch(err => console.log(err));
   }
@@ -64,7 +65,7 @@ export default function Profile() {
     } else {
       axios({
         method: "put",
-        url: "http://localhost:8000/users/acads/",
+        url: `${API_ROOT}/users/acads/`,
         data: { code: courseCode },
         withCredentials: true
       })
@@ -76,7 +77,7 @@ export default function Profile() {
       // setDetails(newDetails);
 
       // axios
-      //   .get("http://localhost:8000/users/acads", { withCredentials: true })
+      //   .get(`${API_ROOT}/users/acads`, { withCredentials: true })
       //   .then(res => setDetails(res.data))
       //   .catch(err => console.log(err));
 
@@ -89,7 +90,7 @@ export default function Profile() {
     console.log(courseCode);
     axios({
       method: "delete",
-      url: "http://localhost:8000/users/course/delete/",
+      url: `${API_ROOT}/users/course/delete/`,
       data: { code: courseCode },
       withCredentials: true
     }).then(getCourses)
