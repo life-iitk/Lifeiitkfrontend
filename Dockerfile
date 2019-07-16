@@ -1,5 +1,5 @@
 #Stage 0 : the build stage
-FROM node:apline as frontend-build
+FROM node as frontend-build
 WORKDIR /frontend
 COPY package*.json /frontend/
 RUN npm install
