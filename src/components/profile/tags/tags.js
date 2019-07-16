@@ -9,7 +9,7 @@ import { Fab } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import axios from "axios";
 import AddIcon from "@material-ui/icons/Add";
-import {API_ROOT } from "../../api-config"; 
+import {API_ROOT } from "../../../api-config"; 
 
 const useStyles = makeStyles(theme => ({
   root: {
