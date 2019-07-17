@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import axios from 'axios'
 import { makeStyles } from "@material-ui/core/styles";
 import {
@@ -12,6 +12,8 @@ import {
   IconButton
 } from "@material-ui/core";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
+import { API_ROOT } from "../../api-config";
+
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -34,35 +36,35 @@ const useStyles = makeStyles(theme => ({
 const LoginBox = props => {
   const [showPwd, setPwdShow] = React.useState(false);
   const classes = useStyles();
-  const [state,setstate] = useState('default');
-  const [state1,setstate1] = useState('');
+  const [state, setstate] = useState('default');
+  const [state1, setstate1] = useState('');
   const [error, setError] = useState(false)
-  const handleClick = (e)=>{
+  const handleClick = (e) => {
     e.preventDefault();
     var form_data = new FormData();
-    form_data.set('username',state);
-    form_data.set('password',state1);
+    form_data.set('username', state);
+    form_data.set('password', state1);
     var qs = require('qs');
     axios({
-        method: 'post',
-        url: 'http://localhost:8000/users/auth/login/',
-        data: qs.stringify({
-          'username' : state,
-          'password' : state1
-        }),
-        withCredentials: true
+      method: 'post',
+      url: `${API_ROOT}/users/auth/login/`,
+      data: qs.stringify({
+        'username': state,
+        'password': state1
+      }),
+      withCredentials: true
     })
-    .then(res => window.location.reload())
-    .catch(err => setError(true));
+      .then(res => window.location.reload())
+      .catch(err => setError(true));
 
   };
-  const func1 = (event)=>{
-  event.preventDefault();
-  setstate(event.target.value);
+  const func1 = (event) => {
+    event.preventDefault();
+    setstate(event.target.value);
   };
-  const func2 = (event)=>{
-  event.preventDefault();
-  setstate1(event.target.value);
+  const func2 = (event) => {
+    event.preventDefault();
+    setstate1(event.target.value);
   };
 
   return (
@@ -80,32 +82,32 @@ const LoginBox = props => {
           Life@IITK
         </Typography>
         <form>
-        <FormControl className={classes.formgroup}>
-          <InputLabel>Username</InputLabel>
-          <Input required={true} onChange = {func1}>Username</Input>
-        </FormControl>
-        <FormControl className={classes.formgroup}>
-          <InputLabel>Password</InputLabel>
-          <Input onChange = {func2}
-            type={showPwd ? "text" : "password"}
-            required={true}
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="Toggle password visibility"
-                  onClick={() => setPwdShow(!showPwd)}
-                >
-                  {showPwd ? <Visibility /> : <VisibilityOff />}
-                </IconButton>
-              </InputAdornment>
-            }
-          />
-        </FormControl>
-        <br />
-        {error &&
-        <p style={{color:'red'}}>Wrong Username or Password</p>}
-        <Button onClick={handleClick} variant="contained" color="primary" style={{ margin: 10 }} type="submit">
-          Login
+          <FormControl className={classes.formgroup}>
+            <InputLabel>Username</InputLabel>
+            <Input required={true} onChange={func1}>Username</Input>
+          </FormControl>
+          <FormControl className={classes.formgroup}>
+            <InputLabel>Password</InputLabel>
+            <Input onChange={func2}
+              type={showPwd ? "text" : "password"}
+              required={true}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="Toggle password visibility"
+                    onClick={() => setPwdShow(!showPwd)}
+                  >
+                    {showPwd ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              }
+            />
+          </FormControl>
+          <br />
+          {error &&
+            <p style={{ color: 'red' }}>Wrong Username or Password</p>}
+          <Button onClick={handleClick} variant="contained" color="primary" style={{ margin: 10 }} type="submit">
+            Login
         </Button>
         </form>
       </div>

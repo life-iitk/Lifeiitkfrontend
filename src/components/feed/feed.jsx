@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import FeedPost from "./feedPost";
 import axios from "axios";
+import { API_ROOT } from "../../api-config";
 
 // Sample post for frontend testing
 // const samplePost = {
@@ -44,7 +45,7 @@ class Feed extends Component {
 
   getItems() {
     axios
-      .get("http://localhost:8000/events/feed", { withCredentials: true })
+      .get(`${API_ROOT}/events/feed`, { withCredentials: true })
       .then(res => this.setState({ posts: res.data }))
       .catch(err => console.log(err));
   }

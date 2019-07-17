@@ -5,10 +5,11 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Chip from '@material-ui/core/Chip';
-import {Fab} from '@material-ui/core';
+import { Fab } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import axios from "axios";
 import AddIcon from "@material-ui/icons/Add";
+import {API_ROOT } from "../../api-config"; 
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -69,29 +70,31 @@ export default function Tags() {
   const addTag = () => {
     axios({
       method: "put",
-      url: "http://localhost:8000/users/tags/",
+      url: `${API_ROOT}/users/tags/`,
       data: { name: toSubTagNames },
       withCredentials: true
-    }).then(()=>getSubTagName(setSubTagName));
+    }).then(() => getSubTagName(setSubTagName));
   };
   const deleteTag = index => {
     axios({
       method: "delete",
-      url: "http://localhost:8000/users/tags/delete/",
+      url: `${API_ROOT}/users/tags/delete/`,
       data: { tag_id: index },
       withCredentials: true
-    }).then(()=>getSubTagName(setSubTagName));
+    }).then(() => getSubTagName(setSubTagName));
   };
 
   const getTagName = (set) => {
-    axios.get("http://localhost:8000/tags/all/").then(response => {
-      set(response.data);});
+    axios.get(`${API_ROOT}/tags/all/`).then(response => {
+      set(response.data);
+    });
   };
-  
+
   const getSubTagName = (set) => {
-    axios.get("http://localhost:8000/users/profile/", { withCredentials: true }).then(response => {
+    axios.get(`${API_ROOT}/users/profile/`, { withCredentials: true }).then(response => {
       console.log(response.data.tags);
-      set(response.data.tags);});
+      set(response.data.tags);
+    });
   };
 
   useEffect(() => {
@@ -103,10 +106,10 @@ export default function Tags() {
     setToSubTagName(event.target.value);
   }
 
-  return tagNames.length===0  ? (
+  return tagNames.length === 0 ? (
     "Loading..."
   ) : (
-    <div className={classes.root}>
+      <div className={classes.root}>
         {/* <Grid 
             container
             direction="row"
@@ -114,50 +117,50 @@ export default function Tags() {
             spacing={1}
             className={classes.grid}
         > */}
-            {/* <Grid item> */}
-                <FormControl className={classes.formControl}>
-                  <div>
-                  <InputLabel htmlFor="select-multiple-chip">Tags</InputLabel>
-                <Select
-                      style = {{marginRight:0.5+'em'}}
-                      value={toSubTagNames}
-                      onChange={changeToSub}
-                      inputProps={{
-                        name: 'age',
-                        id: 'age-simple',
-                      }}
-                      >
-                      {
-                        tagNames.map(tag => (
-                        <MenuItem key={tag.tag_id} value={tag.name} style={getStyles(tag.name, personName, theme)}>
-                        {tag.name}
-                        </MenuItem>
-                    ))}
-                    </Select>
+        {/* <Grid item> */}
+        <FormControl className={classes.formControl}>
+          <div>
+            <InputLabel htmlFor="select-multiple-chip">Tags</InputLabel>
+            <Select
+              style={{ marginRight: 0.5 + 'em' }}
+              value={toSubTagNames}
+              onChange={changeToSub}
+              inputProps={{
+                name: 'age',
+                id: 'age-simple',
+              }}
+            >
+              {
+                tagNames.map(tag => (
+                  <MenuItem key={tag.tag_id} value={tag.name} style={getStyles(tag.name, personName, theme)}>
+                    {tag.name}
+                  </MenuItem>
+                ))}
+            </Select>
 
-                    <Fab
-                      color="primary"
-                      size="small"
-                      onClick={addTag}
-                      className={classes.fab}
-                    >
-                      <AddIcon />
-                    </Fab>
-                    </div>
-                    {subTagNames.map((tag) => (
-                        <Chip
-                          key={tag.tag_id}
-                          label={tag.name}
-                          color="primary"
-                          margin="dense"
-                          onDelete={() => deleteTag(tag.tag_id)}
-                          className={classes.chip}
-                        />
-                      ))}
+            <Fab
+              color="primary"
+              size="small"
+              onClick={addTag}
+              className={classes.fab}
+            >
+              <AddIcon />
+            </Fab>
+          </div>
+          {subTagNames.map((tag) => (
+            <Chip
+              key={tag.tag_id}
+              label={tag.name}
+              color="primary"
+              margin="dense"
+              onDelete={() => deleteTag(tag.tag_id)}
+              className={classes.chip}
+            />
+          ))}
 
-                </FormControl>
-            {/* </Grid> */}
+        </FormControl>
+        {/* </Grid> */}
         {/* </Grid>       */}
-    </div>
-  );
+      </div>
+    );
 }
