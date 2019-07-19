@@ -1,11 +1,11 @@
 import React from "react";
-import { Grid, Avatar, Typography, Paper, InputAdornment, IconButton, TextField , Fab ,Icon } from "@material-ui/core";
+import { Grid, Avatar, Typography, Paper, InputAdornment, IconButton, TextField, Fab } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import ChatIcon from "@material-ui/icons/Chat";
 import Por from "./por/por";
 import Tags from "./tags/tags.js";
 import axios from "axios";
-import {API_ROOT } from "../../api-config";
+import { API_ROOT } from "../../api-config";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -15,12 +15,13 @@ const useStyles = makeStyles(theme => ({
   paper: {
     maxWidth: 210,
     margin: `${theme.spacing(1)}px auto`,
-    padding: theme.spacing(2)
+    padding: theme.spacing(2),
+    marginLeft: 35
   },
   bigAvatar: {
     margin: 20,
-    width: 100,
-    height: 100
+    width: 130,
+    height: 130
   },
   updateButton: {
     margin: 20,
@@ -34,7 +35,10 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(0),
     marginLeft: theme.spacing(1),
     boxShadow: "none"
-  }
+  },
+  extendedIcon: {
+    marginRight: theme.spacing(1),
+  },
 }));
 
 const UserInfo = props => {
@@ -45,7 +49,7 @@ const UserInfo = props => {
     axios({
       method: "put",
       url: `${API_ROOT}/users/`,
-      data: {fblink: link},
+      data: { fblink: link },
       withCredentials: true
     });
   }
@@ -54,11 +58,11 @@ const UserInfo = props => {
     <React.Fragment>
       <Grid container direction="row" spacing={1}>
         <Grid item>
-              <Avatar
-                src={props.details.image}   //Need to look into
-                alt="Hi there"
-                className={classes.bigAvatar}
-              />
+          <Avatar
+            src={props.details.image}   //Need to look into
+            alt="Hi there"
+            className={classes.bigAvatar}
+          />
         </Grid>
         <Grid item>
           <Paper className={classes.paper}>
@@ -108,12 +112,12 @@ const UserInfo = props => {
         </Grid>
       </Grid>
       <Grid direction="row">
-          <Por por = {props.details.por} /> 
-      </Grid> 
-      <Grid>
-          <Tags tags = {props.details.tags}/>
+        <Por por={props.details.por} />
       </Grid>
-      <TextField
+      <Grid style={{ margin: 20 }}>
+        <Tags tags={props.details.tags} />
+      </Grid>
+      <TextField style={{ marginLeft: 20 }}
         variant="filled"
         label="Facebook Link"
         defaultValue={props.details.fblink}
@@ -130,10 +134,12 @@ const UserInfo = props => {
           ),
         }}
       />
-      <Fab color="secondary" className={classes.fab} onClick={updateLink}>
-        <Icon>edit_icon</Icon>
+
+      <Fab variant="extended" aria-label="Update" className={classes.fab} onClick={updateLink} color="secondary">
+        Update
       </Fab>
-    </React.Fragment>
+    
+    </React.Fragment >
   );
 };
 
