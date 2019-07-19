@@ -160,6 +160,7 @@ export default function Tags() {
                 id: 'age-simple',
               }}
             >
+    {arrangeTags()}
               {
                 order.map(id => (
                   <MenuItem key={tagNames[id].tag_id} value={tagNames[id].name} style={getStyles(tagNames[id].name, personName, theme)}>
