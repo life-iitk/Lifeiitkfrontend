@@ -45,7 +45,7 @@ class Feed extends Component {
 
   getItems() {
     axios
-      .get(`${API_ROOT}/events/feed`, { withCredentials: true })
+      .get(`${API_ROOT}/events/feed/`, { withCredentials: true })
       .then(res => this.setState({ posts: res.data }))
       .catch(err => console.log(err));
   }
