@@ -139,7 +139,6 @@ export default function Tags() {
             </Select>
 
             <Fab
-              style={{ paddingLeft: 7}}
               color="primary"
               size="small"
               onClick={addTag}
