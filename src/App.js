@@ -27,19 +27,19 @@ class App extends Component {
       activePage: 0,
       sidebarActive: false,
       loginBoxOpen: false,
-      details :{}
-      
+      details: {}
+
     };
   }
-  IsLoggedIn () {
+  IsLoggedIn() {
     axios
-      .get(`${API_ROOT}/users/profile`, { withCredentials: true })
+      .get(`${API_ROOT}/users/profile/`, { withCredentials: true })
       .then(res => {
-        this.setState({details: res.data});
+        this.setState({ details: res.data });
         console.log(this.state.details);
       })
-      .catch(err => this.setState({loginBoxOpen:true}));
-    
+      .catch(err => this.setState({ loginBoxOpen: true }));
+
     console.log(this.state.details)
   }
 
@@ -47,19 +47,19 @@ class App extends Component {
     axios
       .get(`${API_ROOT}/users/owned/`, { withCredentials: true })
       .then(res => {
-        let newPages = res.data.owned.map(pg => ({name: pg.name, icon: "settings"}));
+        let newPages = res.data.owned.map(pg => ({ name: pg.name, icon: "settings" }));
         let prevList = this.state.pages.concat(newPages);
-        this.setState({pages: prevList});
+        this.setState({ pages: prevList });
 
       })
       .catch(err => console.log(err));
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.IsLoggedIn();
     this.getOwnedtags();
-    if(this.state.details.length === 0)
-      this.setState({loginBoxOpen: true})
+    if (this.state.details.length === 0)
+      this.setState({ loginBoxOpen: true })
   }
 
   sidebarToggleHandler = () => {
