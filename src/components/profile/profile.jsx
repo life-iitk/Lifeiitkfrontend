@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import AcadSection from "./acads/acads";
 import UserInfo from "./userInfo";
 import axios from "axios";
-import { API_ROOT } from "../../api-config"
+import { API_ROOT } from "../../api-config";
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 
@@ -46,18 +46,12 @@ export default function Profile() {
       .catch(err => console.log(err));
   }, []); //Pass acads array to acads portion and rest to profile section
 
-  // const [courses, setCourses] = React.useState([
-  //   { code: "MTH101", name: "Mathematics - I" },
-  //   { code: "PHY101", name: "Physics Laboratory" },
-  //   { code: "ESC101", name: "Fundamentals of Computer Science" }
-  // ]);
-
   const getCourses = () => {
     axios
       .get(`${API_ROOT}/users/profile`, { withCredentials: true })
       .then(res => setDetails(res.data))
       .catch(err => console.log(err));
-  }
+  };
 
   const addCourse = courseCode => {
     if (details.acads.find(course => course.code === courseCode)) {
@@ -93,7 +87,8 @@ export default function Profile() {
       url: `${API_ROOT}/users/course/delete/`,
       data: { code: courseCode },
       withCredentials: true
-    }).then(getCourses)
+    })
+      .then(getCourses)
       .catch(err => console.log(err));
   };
 
