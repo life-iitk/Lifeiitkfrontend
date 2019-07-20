@@ -34,69 +34,68 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function Profile() {
- 
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const changePage = (e, newPg) => setPage(newPg);
   const [details, setDetails] = useState({ acads: [] });
 
   useEffect(() => {
-     axios
-       .get(`${API_ROOT}/users/profile`, { withCredentials: true })
-       .then(res => setDetails(res.data))
-       .catch(err => console.log(err));
-   }, []); //Pass acads array to acads portion and rest to profile section
+    axios
+      .get(`${API_ROOT}/users/profile`, { withCredentials: true })
+      .then(res => setDetails(res.data))
+      .catch(err => console.log(err));
+  }, []); //Pass acads array to acads portion and rest to profile section
 
-  // // const [courses, setCourses] = React.useState([
-  // //   { code: "MTH101", name: "Mathematics - I" },
-  // //   { code: "PHY101", name: "Physics Laboratory" },
-  // //   { code: "ESC101", name: "Fundamentals of Computer Science" }
-  // // ]);
+  // const [courses, setCourses] = React.useState([
+  //   { code: "MTH101", name: "Mathematics - I" },
+  //   { code: "PHY101", name: "Physics Laboratory" },
+  //   { code: "ESC101", name: "Fundamentals of Computer Science" }
+  // ]);
 
-   const getCourses = () => {
-     axios
-       .get(`${API_ROOT}/users/profile`, { withCredentials: true })
-       .then(res => setDetails(res.data))
-       .catch(err => console.log(err));
-   }
+  const getCourses = () => {
+    axios
+      .get(`${API_ROOT}/users/profile`, { withCredentials: true })
+      .then(res => setDetails(res.data))
+      .catch(err => console.log(err));
+  }
 
-   const addCourse = courseCode => {
-     if (details.acads.find(course => course.code === courseCode)) {
-       return true;
-     } else {
-       axios({
-         method: "put",
-         url: `${API_ROOT}/users/acads/`,
-         data: { code: courseCode },
-         withCredentials: true
-       })
-       .then(() => getCourses())
-         .catch(err => console.log(err));
+  const addCourse = courseCode => {
+    if (details.acads.find(course => course.code === courseCode)) {
+      return true;
+    } else {
+      axios({
+        method: "put",
+        url: `${API_ROOT}/users/acads/`,
+        data: { code: courseCode },
+        withCredentials: true
+      })
+        .then(() => getCourses())
+        .catch(err => console.log(err));
 
-  //     // const newDetails = { ...details };
-  //     // newDetails.acads.push({ code: courseCode, name: "Something" });
-  //     // setDetails(newDetails);
+      // const newDetails = { ...details };
+      // newDetails.acads.push({ code: courseCode, name: "Something" });
+      // setDetails(newDetails);
 
-  //     // axios
-  //     //   .get(`${API_ROOT}/users/acads`, { withCredentials: true })
-  //     //   .then(res => setDetails(res.data))
-  //     //   .catch(err => console.log(err));
+      // axios
+      //   .get(`${API_ROOT}/users/acads`, { withCredentials: true })
+      //   .then(res => setDetails(res.data))
+      //   .catch(err => console.log(err));
 
       return false;
-     }
-   };
+    }
+  };
 
-   const deleteCourse = courseCode => {
-  //   // Delete course here
-     console.log(courseCode);
-     axios({
-       method: "delete",
-       url: `${API_ROOT}/users/course/delete/`,
-       data: { code: courseCode },
-       withCredentials: true
-     }).then(getCourses)
-       .catch(err => console.log(err));
-   };
+  const deleteCourse = courseCode => {
+    // Delete course here
+    console.log(courseCode);
+    axios({
+      method: "delete",
+      url: `${API_ROOT}/users/course/delete/`,
+      data: { code: courseCode },
+      withCredentials: true
+    }).then(getCourses)
+      .catch(err => console.log(err));
+  };
 
   const renderPage = page => {
     if (page === 0) return <UserInfo details={details} />;
