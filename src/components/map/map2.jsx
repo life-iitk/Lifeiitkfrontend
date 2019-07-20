@@ -2,7 +2,7 @@
 // https://codepen.io/leemark/pen/dGgqLZ styling zoom
 import React, { Component } from "react";
 import campusMap from "./campusMap.jpg";
-import academicAreaMap from "./Acad Map App 1-03.jpg";
+import academicAreaMap from "./AcadMap.jpg";
 import "leaflet-search/src/leaflet-search.js";
 import "leaflet-search/src/leaflet-search.css";
 import Tabs from "@material-ui/core/Tabs";
@@ -52,73 +52,73 @@ class Map extends Component {
       { id: 27, title: "Director Bungalow", latitude: 670, longitude: 800 }
     ],
     acadsAreaLocations: [
-      { id: 1, title: "BSBE", latitude: 567, longitude: 610 },
-      { id: 2, title: "Tutorial Block", latitude: 610, longitude: 910 },
-      { id: 3, title: "Old Lecture Halls", latitude: 690, longitude: 1165 },
-      { id: 4, title: "ACMS", latitude: 720, longitude: 596 },
-      { id: 5, title: "SAMTEL", latitude: 750, longitude: 860 },
-      { id: 6, title: "New Lecture Halls", latitude: 590, longitude: 1520 },
-      { id: 7, title: "Western Lab", latitude: 843, longitude: 620 },
-      { id: 8, title: "Civil Engg. Lab", latitude: 1040, longitude: 560 },
-      { id: 9, title: "ACES", latitude: 1040, longitude: 910 },
-      { id: 10, title: "Faculty Building", latitude: 1000, longitude: 1185 },
-      { id: 11, title: "Core Lab", latitude: 1175, longitude: 1240 },
-      { id: 12, title: "Chemical Dept.", latitude: 1690, longitude: 945 },
-      { id: 13, title: "GATE/JEE Office", latitude: 1695, longitude: 545 },
-      { id: 14, title: "SIDBI", latitude: 1906, longitude: 466 },
-      { id: 15, title: "New Core Lab", latitude: 2065, longitude: 495 },
+      { id: 1, title: "BSBE", latitude: 569, longitude: 400 },
+      { id: 2, title: "Tutorial Block", latitude: 616, longitude: 715 },
+      { id: 3, title: "Old Lecture Halls", latitude: 695, longitude: 969 },
+      { id: 4, title: "ACMS", latitude: 725, longitude: 390 },
+      { id: 5, title: "SAMTEL", latitude: 754, longitude: 660 },
+      { id: 6, title: "New Lecture Halls", latitude: 596, longitude: 1320 },
+      { id: 7, title: "Western Lab", latitude: 847, longitude: 408 },
+      { id: 8, title: "Civil Engg. Lab", latitude: 1032, longitude: 354 },
+      { id: 9, title: "ACES", latitude: 1042, longitude: 578 },
+      { id: 10, title: "Faculty Building", latitude: 1002, longitude: 1000 },
+      { id: 11, title: "Core Lab", latitude: 1176, longitude: 1005 },
+      { id: 12, title: "Chemical Dept.", latitude: 1687, longitude: 752 },
+      { id: 13, title: "GATE/JEE Office", latitude: 1692, longitude: 346 },
+      { id: 14, title: "SIDBI", latitude: 1901, longitude: 265 },
+      { id: 15, title: "New Core Lab", latitude: 2059, longitude: 288 },
       {
         id: 16,
         title: "National Wind Tunnel Facility",
-        latitude: 1865,
-        longitude: 710
+        latitude: 1860,
+        longitude: 510
       },
-      { id: 17, title: "Aerospace Dept.", latitude: 1945, longitude: 1025 },
-      { id: 18, title: "Northen Lab", latitude: 1350, longitude: 1530 },
-      { id: 19, title: "IME", latitude: 1710, longitude: 1395 },
-      { id: 20, title: "Mechanical", latitude: 1395, longitude: 1335 },
+      { id: 17, title: "Aerospace Dept.", latitude: 1940, longitude: 825 },
+      { id: 18, title: "Northen Lab", latitude: 1350, longitude: 1324 },
+      { id: 19, title: "IME", latitude: 1707, longitude: 1195 },
+      { id: 20, title: "Mechanical", latitude: 1394, longitude: 1135 },
       {
         id: 21,
         title: "Nuclear and Physics Lab",
-        latitude: 1570,
-        longitude: 1485
+        latitude: 1568,
+        longitude: 1290
       },
       {
         id: 22,
         title: "P.K. Kelkar Library",
-        latitude: 930,
-        longitude: 1500
+        latitude: 933,
+        longitude: 1300
       },
       {
         id: 23,
         title: "Faculty Lounge Canteen",
-        latitude: 790,
-        longitude: 1835
+        latitude: 794,
+        longitude: 1645
       },
-      { id: 24, title: "Southern Lab", latitude: 675, longitude: 1895 },
-      { id: 25, title: "Computer Center", latitude: 1225, longitude: 1765 },
-      { id: 26, title: "Computer Science", latitude: 1565, longitude: 1910 },
+      { id: 24, title: "Southern Lab", latitude: 680, longitude: 1684 },
+      { id: 25, title: "Computer Center", latitude: 1226, longitude: 1566 },
+      { id: 26, title: "Computer Science", latitude: 1563, longitude: 1716 },
       {
         id: 27,
         title: "Design and Earth Science",
-        latitude: 1940,
-        longitude: 1490
+        latitude: 1935,
+        longitude: 1280
       },
-      { id: 28, title: "Mechanical Lab", latitude: 1375, longitude: 675 },
-      { id: 29, title: "Nursery", latitude: 2020, longitude: 2040 },
+      { id: 28, title: "Mechanical Lab", latitude: 1374, longitude: 478 },
+      { id: 29, title: "Nursery", latitude: 2014, longitude: 1825 },
       //{ id: 30, title: "Central Workshop", latitude: 650, longitude: 590 },
-      { id: 31, title: "Workshop", latitude: 1380, longitude: 530 },
+      { id: 31, title: "Workshop", latitude: 1379, longitude: 330 },
       // {
       //   id: 32,
       //   title: "Silver Jubilee Landmark",
       //   latitude: 340,
       //   longitude: 235
       // },
-      { id: 33, title: "DOAA Canteen", latitude: 1570, longitude: 705 },
-      { id: 34, title: "Canteen", latitude: 1410, longitude: 1695 }
+      { id: 33, title: "DOAA Canteen", latitude: 1568, longitude: 500 },
+      { id: 34, title: "Canteen", latitude: 1409, longitude: 1500 }
     ],
     centerCampus: [1466, 1262],
-    centerAcadsArea: [1294, 1380]
+    centerAcadsArea: [1284, 1148]
   };
 
   handleChange = (event, newValue) => {
@@ -229,7 +229,7 @@ class Map extends Component {
   }
 
   boundsCampus = [[0, 0], [2932, 2524]];
-  boundsAcademicArea = [[0, 0], [2588, 2759]];
+  boundsAcademicArea = [[0, 0], [2567, 2295]];
 
   campusOverlay = L.imageOverlay(campusMap, this.boundsCampus);
   acadsAreaOverlay = L.imageOverlay(academicAreaMap, this.boundsAcademicArea);
