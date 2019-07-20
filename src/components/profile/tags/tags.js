@@ -105,6 +105,36 @@ export default function Tags() {
   function changeToSub(event) {
     setToSubTagName(event.target.value);
   }
+  const order = [];
+  function arrangeTags() {
+    let i;
+    let tempWords = [];
+    for (i = 0; i < tagNames.length; i++) {
+      tempWords.push(tagNames[i]["name"]);
+      order.push(i);
+    };
+
+    let j;
+
+    for (i = 0; i < tempWords.length; i++) {
+      let s = tempWords[i];
+      let min = i;
+      for (j = i + 1; j < tempWords.length; j++) {
+        if (tempWords[j] < s) {
+          s = tempWords[j];
+          min = j;
+        };
+      };
+
+      let temp = tempWords[i];
+      tempWords[i] = tempWords[min];
+      tempWords[min] = temp;
+
+      temp = order[i];
+      order[i] = order[min];
+      order[min] = temp;
+    };
+  }
 
   return tagNames.length === 0 ? (
     "Loading..."
@@ -131,9 +161,9 @@ export default function Tags() {
               }}
             >
               {
-                tagNames.map(tag => (
-                  <MenuItem key={tag.tag_id} value={tag.name} style={getStyles(tag.name, personName, theme)}>
-                    {tag.name}
+                order.map(id => (
+                  <MenuItem key={tagNames[id].tag_id} value={tagNames[id].name} style={getStyles(tagNames[id].name, personName, theme)}>
+                    {tagNames[id].name}
                   </MenuItem>
                 ))}
             </Select>
