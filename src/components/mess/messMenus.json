@@ -1,0 +1,70 @@
+{
+  "GHT": [
+    {
+      "title": "Monday",
+      "breakfast": [["Poori", "Aloo Tamatar"], []],
+      "lunch": [
+        ["Aloo Nutrela Dry/Soyabean Choora", "Arhar Dal", "Curd Rice", "Rasna"],
+        ["Mughlai Chicken", "Paneer Paratha"]
+      ],
+      "dinner": [
+        ["Aloo Kela/Aloo Chola", "Mix Dal Tadka"],
+        ["Milk Shakes", "Butter Chicken"]
+      ]
+    },
+    {
+      "title": "Tuesday",
+      "breakfast": [["Idli", "Banana Chips", "Fried Idli"], []],
+      "lunch": [["Rajma", "Lemon Rice", "Baigan ka Bharta"], ["Aloo Tikki"]],
+      "dinner": [
+        ["Kathal Kofta", "Sweet Kheer", "Paratha"],
+        ["Chicken Biryani"]
+      ]
+    },
+    {
+      "title": "Wednesday",
+      "breakfast": [["Idli", "Banana Chips", "Fried Idli"], []],
+      "lunch": [["Rajma", "Lemon Rice", "Baigan ka Bharta"], ["Aloo Tikki"]],
+      "dinner": [
+        ["Kathal Kofta", "Sweet Kheer", "Paratha"],
+        ["Chicken Biryani"]
+      ]
+    },
+    {
+      "title": "Thursday",
+      "breakfast": [["Idli", "Banana Chips", "Fried Idli"], []],
+      "lunch": [["Rajma", "Lemon Rice", "Baigan ka Bharta"], ["Aloo Tikki"]],
+      "dinner": [
+        ["Kathal Kofta", "Sweet Kheer", "Paratha"],
+        ["Chicken Biryani"]
+      ]
+    },
+    {
+      "title": "Friday",
+      "breakfast": [["Idli", "Banana Chips", "Fried Idli"], []],
+      "lunch": [["Rajma", "Lemon Rice", "Baigan ka Bharta"], ["Aloo Tikki"]],
+      "dinner": [
+        ["Kathal Kofta", "Sweet Kheer", "Paratha"],
+        ["Chicken Biryani"]
+      ]
+    },
+    {
+      "title": "Saturday",
+      "breakfast": [["Idli", "Banana Chips", "Fried Idli"], []],
+      "lunch": [["Rajma", "Lemon Rice", "Baigan ka Bharta"], ["Aloo Tikki"]],
+      "dinner": [
+        ["Kathal Kofta", "Sweet Kheer", "Paratha"],
+        ["Chicken Biryani"]
+      ]
+    },
+    {
+      "title": "Sunday",
+      "breakfast": [["Idli", "Banana Chips", "Fried Idli"], []],
+      "lunch": [["Rajma", "Lemon Rice", "Baigan ka Bharta"], ["Aloo Tikki"]],
+      "dinner": [
+        ["Kathal Kofta", "Sweet Kheer", "Paratha"],
+        ["Chicken Biryani"]
+      ]
+    }
+  ]
+}
