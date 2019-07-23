@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
 import {
   Modal,
   FormControl,
@@ -47,6 +47,12 @@ const MenuProps = {
     }
   }
 };
+
+const StyledChip = withStyles({
+  colorPrimary:{
+    background: props => props.pC
+  }
+})(({classes, pC, ...others}) => <Chip classes={classes} {...others}/>)
 
 const FilterModal = props => {
   const classes = useStyles();
@@ -129,11 +135,12 @@ const FilterModal = props => {
               <AddIcon />
             </Fab>
             {props.tags.filter(t => t.isSelected).map((tag) => (
-              <Chip
+              <StyledChip
                 key={tag.tag_id}
                 label={tag.name}
                 color="primary"
                 margin="dense"
+                pC={tag.color}
                 onDelete={() => props.Unselect(tag)}
                 className={classes.chip}
               />
