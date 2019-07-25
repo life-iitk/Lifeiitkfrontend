@@ -22,6 +22,22 @@ const ColoredDateCellWrapper = ({ children }) =>
     }
   });
 
+function stringToColor(string) {
+  let hash = 0;
+  let i;
+  for (i = 0; i < string.length; i += 1) {
+    hash = string.charCodeAt(i) + ((hash << 5) - hash);
+  }
+
+  let colour = "#";
+
+  for (i = 0; i < 3; i += 1) {
+    const value = (hash >> (i * 8)) & 0xff;
+    colour += `00${value.toString(16)}`.substr(-2);
+  }
+  return colour;
+}
+
 const toCalendarPost = event => {
   const startDt = new moment(event.date+event.start_time, 'YYYY-MM-DDHH:mm:ss');
   const endDt = new moment(event.date+event.end_time,'YYYY-MM-DDHH:mm:ss');
@@ -101,7 +117,10 @@ class Calendar extends Component {
         events = events.map(event => {
           event.tags.forEach(tag => {
             tag.isSelected = true;
-            if (!tags[tag.tag_id]) tags[tag.tag_id] = tag;
+            if (!tags[tag.tag_id]) {
+              tag.color = stringToColor(tag.name);
+              tags[tag.tag_id] = tag;
+            }
           });
           return event;
         });
