@@ -26,7 +26,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const EventCard = props => {
-  console.log(props)
   const classes = useStyles();
   const [postOpen, setPostOpen] = React.useState(false);
   const [delOpen, setDelOpen] = React.useState(false);
@@ -37,15 +36,13 @@ const EventCard = props => {
 
   const togglePost = () => setPostOpen(!postOpen);
   const toggleDelBox = () => setDelOpen(!delOpen);
-  useEffect(() => getTagName(setTagName), []); 
-  const getTagName = (set) => {
-    if(!!!post.tag_name) {
-      console.log(post.tags);
-      post["TAGNAME"]=post.tags[0].name;
-    set(post.tags[0].name);
-    }
-    else {
-      post["TAGNAME"]=post.tag_name;
+  useEffect(() => getTagName(setTagName), []);
+  const getTagName = set => {
+    if (!!!post.tag_name) {
+      post["TAGNAME"] = post.tags[0].name;
+      set(post.tags[0].name);
+    } else {
+      post["TAGNAME"] = post.tag_name;
       set(post.tag_name);
     }
   };

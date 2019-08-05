@@ -4,7 +4,7 @@ import EventCard from "./eventCard";
 import { Fab } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import axios from "axios";
-import { API_ROOT } from "../../api-config"
+import { API_ROOT } from "../../api-config";
 
 // Sample post for frontend testing
 // const samplePost = {
@@ -34,7 +34,7 @@ class Admin extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.name !== prevProps.name){
+    if (this.props.name !== prevProps.name) {
       this.getItems();
     }
   }
@@ -47,7 +47,10 @@ class Admin extends Component {
 
   getItems() {
     axios
-      .get(`${API_ROOT}/events/view/tagged_events/?tag_name=`+ this.props.name, { withCredentials: true })    
+      .get(
+        `${API_ROOT}/events/view/tagged_events/?tag_name=` + this.props.name,
+        { withCredentials: true }
+      )
       .then(res => this.setState({ events: res.data }))
       .catch(err => console.log(err));
   }
@@ -69,9 +72,10 @@ class Admin extends Component {
     axios({
       method: "delete",
       url: `${API_ROOT}/events/delete/`,
-      data: { "event_id": id},
+      data: { event_id: id },
       withCredentials: true
-    }).then()
+    })
+      .then()
       .catch(err => console.log(err));
     const newEvents = [...this.state.events];
     const index = newEvents.findIndex(ev => ev.event_id === id);
@@ -80,9 +84,13 @@ class Admin extends Component {
   };
 
   renderPosts = () => {
-    console.log(this.state.events);
     return this.state.events.map((event, index) => (
-      <EventCard post={event} delete={this.deleteEvent} key={index} name={this.props.name} />
+      <EventCard
+        post={event}
+        delete={this.deleteEvent}
+        key={index}
+        name={this.props.name}
+      />
     ));
   };
 
