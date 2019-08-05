@@ -65,7 +65,6 @@ export default function Tags(props) {
     axios
       .get(`${API_ROOT}/users/profile/`, { withCredentials: true })
       .then(response => {
-        console.log(response.data.tags);
         set(response.data.tags);
       });
   };

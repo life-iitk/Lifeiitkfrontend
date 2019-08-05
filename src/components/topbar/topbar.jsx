@@ -7,7 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import axios from "axios";
-import {API_ROOT} from "../../api-config";
+import { API_ROOT } from "../../api-config";
 
 const drawerWidth = 240;
 const useStyles = makeStyles(theme => ({
@@ -29,23 +29,18 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const TopBar = props => {
-  console.log(props.data);
   const classes = useStyles();
   const [loggedIn, setLoggedIn] = React.useState(false);
 
   const logout = () => {
     axios
-      .get(`${API_ROOT}/users/auth/logout/`, { withCredentials: true })
+      .post(`${API_ROOT}/users/auth/logout/`, { withCredentials: true })
       .then(() => window.location.reload());
-  }
+  };
 
   useEffect(() => {
-    console.log(props.data)
-    console.log(Object.keys(props.data).length)
-    if (Object.keys(props.data).length !== 0)
-      setLoggedIn(true)
-      console.log(loggedIn);
-  },[props.data])
+    if (Object.keys(props.data).length !== 0) setLoggedIn(true);
+  }, [props.data]);
 
   return (
     <AppBar position="fixed" className={classes.appBar}>
@@ -62,16 +57,15 @@ const TopBar = props => {
         <Typography variant="h6" className={classes.title} noWrap>
           {props.currentPage.name}
         </Typography>
-        { loggedIn ? (
-        <Button color="inherit" onClick={logout}>
-        Logout
-      </Button>
-        ) : ( 
-        <Button color="inherit" onClick={props.openLogin}>
-        Login
-      </Button>
+        {loggedIn ? (
+          <Button color="inherit" onClick={logout}>
+            Logout
+          </Button>
+        ) : (
+          <Button color="inherit" onClick={props.openLogin}>
+            Login
+          </Button>
         )}
-
       </Toolbar>
     </AppBar>
   );

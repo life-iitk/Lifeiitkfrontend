@@ -81,7 +81,6 @@ export default function Profile() {
 
   const deleteCourse = courseCode => {
     // Delete course here
-    console.log(courseCode);
     axios({
       method: "delete",
       url: `${API_ROOT}/users/course/delete/`,

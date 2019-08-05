@@ -143,9 +143,6 @@ class Map extends Component {
   };
 
   handleMarkerClick = e => {
-    console.log("marker was clicked");
-    console.log(e.target.id);
-
     this.map.setView(
       e.target.getLatLng(),
       this.state.selectedView === 0 ? -1 : 0

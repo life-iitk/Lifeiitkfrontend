@@ -21,14 +21,13 @@ class App extends Component {
         { name: "Map", icon: "map" },
         { name: "Mess", icon: "restaurant" },
         //{ name: "Search", icon: "search" },
-        { name: "Profile", icon: "account_circle" },
+        { name: "Profile", icon: "account_circle" }
         //{ name: "Admin", icon: "settings" } // Temporary
       ],
       activePage: 0,
       sidebarActive: false,
       loginBoxOpen: false,
       details: {}
-
     };
   }
   IsLoggedIn() {
@@ -36,21 +35,20 @@ class App extends Component {
       .get(`${API_ROOT}/users/profile/`, { withCredentials: true })
       .then(res => {
         this.setState({ details: res.data });
-        console.log(this.state.details);
       })
       .catch(err => this.setState({ loginBoxOpen: true }));
-
-    console.log(this.state.details)
   }
 
   getOwnedtags() {
     axios
       .get(`${API_ROOT}/users/owned/`, { withCredentials: true })
       .then(res => {
-        let newPages = res.data.owned.map(pg => ({ name: pg.name, icon: "settings" }));
+        let newPages = res.data.owned.map(pg => ({
+          name: pg.name,
+          icon: "settings"
+        }));
         let prevList = this.state.pages.concat(newPages);
         this.setState({ pages: prevList });
-
       })
       .catch(err => console.log(err));
   }
@@ -58,8 +56,7 @@ class App extends Component {
   componentDidMount() {
     this.IsLoggedIn();
     this.getOwnedtags();
-    if (this.state.details.length === 0)
-      this.setState({ loginBoxOpen: true })
+    if (this.state.details.length === 0) this.setState({ loginBoxOpen: true });
   }
 
   sidebarToggleHandler = () => {
@@ -76,7 +73,6 @@ class App extends Component {
   };
 
   render() {
-    console.log("Rendered");
     return (
       <div
         style={{
