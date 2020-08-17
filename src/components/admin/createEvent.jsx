@@ -1,5 +1,6 @@
 import React from "react";
-import axios from 'axios';
+import axios from "axios";
+import moment from "moment";
 import {
   Modal,
   CardContent,
@@ -9,13 +10,15 @@ import {
   CardActions,
   Button,
   Chip,
-  Fab
+  Fab,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import AddIcon from "@material-ui/icons/Add";
-import { API_ROOT } from "../../api-config"
+import { API_ROOT } from "../../api-config";
 
-const useStyles = makeStyles(theme => ({
+moment().format();
+
+const useStyles = makeStyles((theme) => ({
   paper: {
     flex: 1,
     position: "absolute",
@@ -24,21 +27,21 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing(1),
-    outline: "none"
+    outline: "none",
   },
   chip: {
     margin: theme.spacing(0.5),
-    marginTop: theme.spacing(1.5)
+    marginTop: theme.spacing(1.5),
   },
   fab: {
-    margin: theme.spacing(0.5)
+    margin: theme.spacing(0.5),
   },
   textField: {
-    margin: theme.spacing(0.5)
-  }
+    margin: theme.spacing(0.5),
+  },
 }));
 
-const CreateEvent = props => {
+const CreateEvent = (props) => {
   const classes = useStyles();
   const [formData, setFormData] = React.useState({
     description: "",
@@ -48,7 +51,7 @@ const CreateEvent = props => {
     start_time: "00:00",
     end_time: "00:00",
     day_long: false,
-    hash_tags: []
+    hash_tags: [],
   });
   const [tag, setTag] = React.useState("");
 
@@ -64,18 +67,25 @@ const CreateEvent = props => {
     e.preventDefault();
     props.create(formData);
     axios({
-      method: 'post',
+      method: "post",
       url: `${API_ROOT}/events/create/`,
-      data: formData,
-      withCredentials : true
+      data: {
+        ...formData,
+        // Convert stuff to Django format
+        date: moment(formData.date).format("YYYY-MM-DD"),
+        start_time: formData.start_time + ":00",
+        end_time: formData.end_time + ":00",
+        day_long: formData.day_long ? "True" : "False",
+      },
+      withCredentials: true,
     });
   };
 
-  const handleChange = name => (e, data) => {
-    formData[name] = name === "allDay" ? data : e.target.value;
+  const handleChange = (name) => (e, data) => {
+    formData[name] = name === "day_long" ? data : e.target.value;
   };
 
-  const deleteTag = index => {
+  const deleteTag = (index) => {
     const newData = { ...formData };
     newData.hash_tags.splice(index, 1);
     setFormData(newData);
@@ -88,7 +98,7 @@ const CreateEvent = props => {
       style={{
         display: "flex",
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
       }}
     >
       <div className={classes.paper}>
@@ -151,7 +161,7 @@ const CreateEvent = props => {
               defaultValue={formData.start_time}
               onChange={handleChange("start_time")}
               inputProps={{
-                step: 300 // 5 min
+                step: 300, // 5 min
               }}
             />
             <TextField
@@ -164,7 +174,7 @@ const CreateEvent = props => {
               defaultValue={formData.end_time}
               onChange={handleChange("end_time")}
               inputProps={{
-                step: 300 // 5 min
+                step: 300, // 5 min
               }}
             />
             <br />
@@ -183,7 +193,7 @@ const CreateEvent = props => {
               margin="dense"
               variant="outlined"
               className={classes.textField}
-              onChange={e => setTag(e.target.value)}
+              onChange={(e) => setTag(e.target.value)}
             />
             <Fab
               color="primary"

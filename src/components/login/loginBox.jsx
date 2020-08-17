@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from 'axios'
+import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Modal,
@@ -9,13 +9,12 @@ import {
   InputLabel,
   Input,
   InputAdornment,
-  IconButton
+  IconButton,
 } from "@material-ui/core";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { API_ROOT } from "../../api-config";
 
-
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   paper: {
     flex: 1,
     position: "absolute",
@@ -25,38 +24,37 @@ const useStyles = makeStyles(theme => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2),
     outline: "none",
-    textAlign: "center"
+    textAlign: "center",
   },
   formgroup: {
     width: "80%",
-    margin: 5
-  }
+    margin: 5,
+  },
 }));
 
-const LoginBox = props => {
+const LoginBox = (props) => {
   const [showPwd, setPwdShow] = React.useState(false);
   const classes = useStyles();
-  const [state, setstate] = useState('default');
-  const [state1, setstate1] = useState('');
-  const [error, setError] = useState(false)
+  const [state, setstate] = useState("default");
+  const [state1, setstate1] = useState("");
+  const [error, setError] = useState(false);
   const handleClick = (e) => {
     e.preventDefault();
     var form_data = new FormData();
-    form_data.set('username', state);
-    form_data.set('password', state1);
-    var qs = require('qs');
+    form_data.set("username", state);
+    form_data.set("password", state1);
+    var qs = require("qs");
     axios({
-      method: 'post',
+      method: "post",
       url: `${API_ROOT}/users/auth/login/`,
       data: qs.stringify({
-        'username': state,
-        'password': state1
+        username: state,
+        password: state1,
       }),
-      withCredentials: true
+      withCredentials: true,
     })
-      .then(res => window.location.reload())
-      .catch(err => setError(true));
-
+      .then((res) => window.location.reload())
+      .catch((err) => setError(true));
   };
   const func1 = (event) => {
     event.preventDefault();
@@ -74,21 +72,24 @@ const LoginBox = props => {
       style={{
         display: "flex",
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
       }}
     >
       <div className={classes.paper}>
         <Typography variant="h4" color="primary">
           Life@IITK
         </Typography>
-        <form>
+        <form onSubmit={(e) => e.preventDefault()}>
           <FormControl className={classes.formgroup}>
             <InputLabel>Username</InputLabel>
-            <Input required={true} onChange={func1}>Username</Input>
+            <Input required={true} onChange={func1}>
+              Username
+            </Input>
           </FormControl>
           <FormControl className={classes.formgroup}>
             <InputLabel>Password</InputLabel>
-            <Input onChange={func2}
+            <Input
+              onChange={func2}
               type={showPwd ? "text" : "password"}
               required={true}
               endAdornment={
@@ -104,11 +105,16 @@ const LoginBox = props => {
             />
           </FormControl>
           <br />
-          {error &&
-            <p style={{ color: 'red' }}>Wrong Username or Password</p>}
-          <Button onClick={handleClick} variant="contained" color="primary" style={{ margin: 10 }} type="submit">
+          {error && <p style={{ color: "red" }}>Wrong Username or Password</p>}
+          <Button
+            onClick={handleClick}
+            variant="contained"
+            color="primary"
+            style={{ margin: 10 }}
+            type="submit"
+          >
             Login
-        </Button>
+          </Button>
         </form>
       </div>
     </Modal>
