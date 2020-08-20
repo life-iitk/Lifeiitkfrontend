@@ -18,8 +18,8 @@ class App extends Component {
       pages: [
         { name: "Feed", icon: "rss_feed" },
         { name: "Calendar", icon: "calendar_today" },
-        { name: "Map", icon: "map" },
-        { name: "Mess", icon: "restaurant" },
+        // { name: "Map", icon: "map" },
+        // { name: "Mess", icon: "restaurant" },
         //{ name: "Search", icon: "search" },
         { name: "Profile", icon: "account_circle" }
         //{ name: "Admin", icon: "settings" } // Temporary
