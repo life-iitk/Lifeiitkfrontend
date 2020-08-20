@@ -41,14 +41,14 @@ export default function Profile() {
 
   useEffect(() => {
     axios
-      .get(`${API_ROOT}/users/profile`, { withCredentials: true })
+      .get(`${API_ROOT}/users/profile/`, { withCredentials: true })
       .then(res => setDetails(res.data))
       .catch(err => console.log(err));
   }, []); //Pass acads array to acads portion and rest to profile section
 
   const getCourses = () => {
     axios
-      .get(`${API_ROOT}/users/profile`, { withCredentials: true })
+      .get(`${API_ROOT}/users/profile/`, { withCredentials: true })
       .then(res => setDetails(res.data))
       .catch(err => console.log(err));
   };
