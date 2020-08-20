@@ -33,8 +33,10 @@ const TopBar = props => {
   const [loggedIn, setLoggedIn] = React.useState(false);
 
   const logout = () => {
-    axios
-      .post(`${API_ROOT}/users/auth/logout/`, { withCredentials: true })
+    axios(`${API_ROOT}/users/auth/logout/`, {
+      method: "post",
+      withCredentials: true
+  })
       .then(() => window.location.reload());
   };
 
