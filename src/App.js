@@ -18,6 +18,13 @@ import axios from "axios";
 import { API_ROOT } from "./api-config";
 import Register from './components/register/registerScreen'
 
+/****
+ * EXPECTED LINKS:
+ *"Activation":"http://localhost:3000/verify/?code={code:s}/",
+ *"PasswordReset": "http://localhost:3000/resetpass/?code={code:s}/",
+ ****/
+
+
 class App extends Component {
 	// 'icon' property in pages is the Material Icons icon name.
 	constructor() {
