@@ -33,8 +33,10 @@ const TopBar = props => {
   const [loggedIn, setLoggedIn] = React.useState(false);
 
   const logout = () => {
-    axios
-      .post(`${API_ROOT}/users/auth/logout/`, { withCredentials: true })
+    axios(`${API_ROOT}/users/auth/logout/`, {
+      method: "post",
+      withCredentials: true
+  })
       .then(() => window.location.reload());
   };
 
@@ -57,7 +59,7 @@ const TopBar = props => {
         <Typography variant="h6" className={classes.title} noWrap>
           {props.currentPage.name}
         </Typography>
-        {loggedIn ? (
+        {(!props.register)&&(loggedIn ? (
           <Button color="inherit" onClick={logout}>
             Logout
           </Button>
@@ -65,7 +67,7 @@ const TopBar = props => {
           <Button color="inherit" onClick={props.openLogin}>
             Login
           </Button>
-        )}
+        ))}
       </Toolbar>
     </AppBar>
   );

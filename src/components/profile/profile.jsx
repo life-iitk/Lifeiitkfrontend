@@ -8,29 +8,29 @@ import { API_ROOT } from "../../api-config";
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    overflow: "hidden"
+    overflow: "hidden",
   },
   paper: {
     maxWidth: 210,
     margin: `${theme.spacing(1)}px auto`,
-    padding: theme.spacing(2)
+    padding: theme.spacing(2),
   },
   bigAvatar: {
     margin: 20,
     width: 100,
-    height: 100
+    height: 100,
   },
   updateButton: {
     margin: 20,
     width: 100,
-    height: 40
+    height: 40,
   },
   input: {
-    display: "none"
-  }
+    display: "none",
+  },
 }));
 
 export default function Profile() {
@@ -41,30 +41,30 @@ export default function Profile() {
 
   useEffect(() => {
     axios
-      .get(`${API_ROOT}/users/profile`, { withCredentials: true })
-      .then(res => setDetails(res.data))
-      .catch(err => console.log(err));
+      .get(`${API_ROOT}/users/profile/`, { withCredentials: true })
+      .then((res) => setDetails(res.data))
+      .catch((err) => console.log(err));
   }, []); //Pass acads array to acads portion and rest to profile section
 
   const getCourses = () => {
     axios
-      .get(`${API_ROOT}/users/profile`, { withCredentials: true })
-      .then(res => setDetails(res.data))
-      .catch(err => console.log(err));
+      .get(`${API_ROOT}/users/profile/`, { withCredentials: true })
+      .then((res) => setDetails(res.data))
+      .catch((err) => console.log(err));
   };
 
-  const addCourse = courseCode => {
-    if (details.acads.find(course => course.code === courseCode)) {
+  const addCourse = (courseCode) => {
+    if (details.acads.find((course) => course.code === courseCode)) {
       return true;
     } else {
       axios({
         method: "put",
         url: `${API_ROOT}/users/acads/`,
         data: { code: courseCode },
-        withCredentials: true
+        withCredentials: true,
       })
         .then(() => getCourses())
-        .catch(err => console.log(err));
+        .catch((err) => console.log(err));
 
       // const newDetails = { ...details };
       // newDetails.acads.push({ code: courseCode, name: "Something" });
@@ -79,19 +79,19 @@ export default function Profile() {
     }
   };
 
-  const deleteCourse = courseCode => {
+  const deleteCourse = (courseCode) => {
     // Delete course here
     axios({
       method: "delete",
       url: `${API_ROOT}/users/course/delete/`,
       data: { code: courseCode },
-      withCredentials: true
+      withCredentials: true,
     })
       .then(getCourses)
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   };
 
-  const renderPage = page => {
+  const renderPage = (page) => {
     if (page === 0) return <UserInfo details={details} />;
     else
       return (
