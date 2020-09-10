@@ -59,7 +59,7 @@ const TopBar = props => {
         <Typography variant="h6" className={classes.title} noWrap>
           {props.currentPage.name}
         </Typography>
-        {loggedIn ? (
+        {(!props.register)&&(loggedIn ? (
           <Button color="inherit" onClick={logout}>
             Logout
           </Button>
@@ -67,7 +67,7 @@ const TopBar = props => {
           <Button color="inherit" onClick={props.openLogin}>
             Login
           </Button>
-        )}
+        ))}
       </Toolbar>
     </AppBar>
   );

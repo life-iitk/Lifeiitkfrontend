@@ -10,7 +10,7 @@ import {
   List,
   ListItem,
   ListItemAvatar,
-  ListItemText
+  ListItemText,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
@@ -24,6 +24,7 @@ import Por from "./por/por";
 import Tags from "./tags/tags.js";
 import axios from "axios";
 import { API_ROOT } from "../../api-config";
+import CustomModal from "../register/customModal";
 
 const userDetailList = [
   { name: "name", icon: <AccountCircleIcon /> },
@@ -32,41 +33,46 @@ const userDetailList = [
   { name: "room", icon: <MeetingRoomIcon /> },
   { name: "hometown", icon: <LocationCityIcon /> },
   { name: "blood_group", icon: <InvertColorsIcon /> },
-  { name: "username", icon: <AlternateEmailIcon /> }
+  { name: "username", icon: <AlternateEmailIcon /> },
 ];
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     overflow: "hidden",
-    alignItems: "center"
+    alignItems: "center",
   },
   wrapper: {
     display: "inline-block",
     margin: 20,
-    textAlign: "center"
+    textAlign: "center",
   },
   imageWrap: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   avatar: {
     margin: 20,
     maxWidth: 220,
-    borderRadius: 10
+    borderRadius: 10,
   },
   vertCards: {
-    margin: "10px 0"
+    margin: "10px 0",
   },
   fab: {
     marginTop: theme.spacing(1),
     marginLeft: theme.spacing(1),
-    boxShadow: "none"
-  }
+    boxShadow: "none",
+  },
 }));
 
-const UserInfo = props => {
+const UserInfo = (props) => {
+  const [modal, setModal] = React.useState({
+    isOpen: false,
+    title: "",
+    message: "",
+  });
   const classes = useStyles();
   const [link, setLink] = React.useState(props.details.fblink);
 
@@ -75,8 +81,41 @@ const UserInfo = props => {
       method: "put",
       url: `${API_ROOT}/users/`,
       data: { fblink: link },
-      withCredentials: true
+      withCredentials: true,
     });
+  };
+
+  const changePassword = () => {
+    const ans = window.confirm("Are You Sure?");
+    // console.log(ans)
+    if (!ans) return;
+    // console.log(props.details)
+    axios({
+      method: "post",
+      url: `${API_ROOT}/users/resetpassemail/`,
+      data: {
+        roll: props.details.roll,
+      },
+      withCredentials: true,
+    })
+      .then((e) => {
+        if (e.status !== 206) {
+          throw new Error("Something Went Wrong");
+        } else {
+          setModal({
+            isOpen: true,
+            title: "Success",
+            message: "Check your email for reset password link",
+          });
+        }
+      })
+      .catch((e) => {
+        setModal({
+          isOpen: true,
+          title: "Error",
+          message: "Something went wrong",
+        });
+      });
   };
 
   return (
@@ -98,7 +137,7 @@ const UserInfo = props => {
           <Grid item sm={6} style={{ width: "100%" }}>
             <Paper style={{ width: "100%" }}>
               <List>
-                {userDetailList.map(detail => (
+                {userDetailList.map((detail) => (
                   <ListItem key={detail.name}>
                     <ListItemAvatar>
                       <Avatar>{detail.icon}</Avatar>
@@ -128,7 +167,7 @@ const UserInfo = props => {
               variant="filled"
               label="Facebook Link"
               defaultValue={props.details.fblink}
-              onChange={e => setLink(e.target.value)}
+              onChange={(e) => setLink(e.target.value)}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -136,7 +175,7 @@ const UserInfo = props => {
                       <i className="fa fa-facebook-official" />
                     </IconButton>
                   </InputAdornment>
-                )
+                ),
               }}
             />
             <Button
@@ -147,9 +186,19 @@ const UserInfo = props => {
             >
               Update
             </Button>
+            <br />
           </Paper>
+          <Button
+            variant="contained"
+            color="secondary"
+            className={classes.fab}
+            onClick={changePassword}
+          >
+            Change password
+          </Button>
         </div>
       </div>
+      <CustomModal classes={classes} modal={modal} setModal={setModal} />
     </React.Fragment>
   );
 };

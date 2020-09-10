@@ -13,6 +13,7 @@ import {
 } from "@material-ui/core";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { API_ROOT } from "../../api-config";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -114,7 +115,8 @@ const LoginBox = (props) => {
             type="submit"
           >
             Login
-          </Button>
+          </Button><br />
+          <Link to='/register/roll'>Signup Instead</Link>
         </form>
       </div>
     </Modal>

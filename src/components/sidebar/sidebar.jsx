@@ -12,48 +12,56 @@ import {
   ListItem,
   ListItemText,
   ListItemIcon,
-  CardHeader
+  CardHeader,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   drawer: {
     [theme.breakpoints.up("sm")]: {
       width: drawerWidth,
-      flexShrink: 0
-    }
+      flexShrink: 0,
+    },
   },
   toolbar: {
     ...theme.mixins.toolbar,
     textAlign: "center",
     display: "flex",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   drawerPaper: {
-    width: drawerWidth
+    width: drawerWidth,
   },
   profile: {
     transition: "all 0.15s ease-in-out",
     "&:hover": {
-      background: "#ececec"
-    }
-  }
+      background: "#ececec",
+    },
+  },
 }));
 
-const SideBar = props => {
+const SideBar = (props) => {
   //console.log(props.data);
   const classes = useStyles();
-  const [details,setDetails] = useState(props.data);
+  const [details, setDetails] = useState(props.data);
 
   useEffect(() => {
-    setDetails({name:props.data.name, roll:props.data.roll, image:props.data.image});
+    if (props.register) {
+      return;
+    }
+    setDetails({
+      name: props.data.name,
+      roll: props.data.roll,
+      image: props.data.image,
+    });
     if (Object.keys(props.data).length === 0)
-      setDetails({name: "Not Logged In!", roll:""});
-  },[props.data])
-  const drawer = isMobile => (
+      setDetails({ name: "Not Logged In!", roll: "" });
+  }, [props.data]);
+  const drawer = (isMobile) => (
     <div>
       <div className={classes.toolbar}>
         <Typography variant="h4" color="primary">
@@ -61,40 +69,46 @@ const SideBar = props => {
         </Typography>
       </div>
       <Divider />
-      <div
-        className={classes.profile}
-        onClick={() => {
-          props.pageHandler("Profile");
-          if (isMobile) props.handleToggle();
-        }}
-      >
-          <CardHeader
-            avatar={<Avatar src={details.image} />}
-            title={details.name}
-            subheader={details.roll}
-          />
-        {/* ) } */}
-      </div>
-      <Divider />
-      <List>
-        {props.pages
-          .filter(page => page.name !== "Profile")
-          .map((page, index) => (
-            <ListItem
-              button
-              key={index}
-              onClick={() => {
-                props.pageHandler(page.name);
-                if (isMobile) props.handleToggle();
-              }}
-            >
-              <ListItemIcon>
-                <i className="material-icons">{page.icon}</i>
-              </ListItemIcon>
-              <ListItemText primary={page.name} />
-            </ListItem>
-          ))}
-      </List>
+      {props.register ? (
+        <CardHeader title={<Link to="/">Go Back</Link>} />
+      ) : (
+        <>
+          <div
+            className={classes.profile}
+            onClick={() => {
+              props.pageHandler("Profile");
+              if (isMobile) props.handleToggle();
+            }}
+          >
+            <CardHeader
+              avatar={<Avatar src={details.image} />}
+              title={details.name}
+              subheader={details.roll}
+            />
+            {/* ) } */}
+          </div>
+          <Divider />
+          <List>
+            {props.pages
+              .filter((page) => page.name !== "Profile")
+              .map((page, index) => (
+                <ListItem
+                  button
+                  key={index}
+                  onClick={() => {
+                    props.pageHandler(page.name);
+                    if (isMobile) props.handleToggle();
+                  }}
+                >
+                  <ListItemIcon>
+                    <i className="material-icons">{page.icon}</i>
+                  </ListItemIcon>
+                  <ListItemText primary={page.name} />
+                </ListItem>
+              ))}
+          </List>
+        </>
+      )}
     </div>
   );
 
@@ -107,10 +121,10 @@ const SideBar = props => {
           open={props.open}
           onClose={props.handleToggle}
           classes={{
-            paper: classes.drawerPaper
+            paper: classes.drawerPaper,
           }}
           ModalProps={{
-            keepMounted: true
+            keepMounted: true,
           }}
         >
           {drawer(true)}
@@ -119,7 +133,7 @@ const SideBar = props => {
       <Hidden xsDown implementation="css">
         <Drawer
           classes={{
-            paper: classes.drawerPaper
+            paper: classes.drawerPaper,
           }}
           variant="permanent"
           open
