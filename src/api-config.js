@@ -10,4 +10,4 @@
 //   backendHost = process.env.REACT_APP_BACKEND_HOST || 'http://localhost:8000';
 // }
 
-export const API_ROOT = `http://localhost:8000/api`;
+export const API_ROOT = `/api`;
